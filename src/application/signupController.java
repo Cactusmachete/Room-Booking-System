@@ -36,8 +36,6 @@ public class signupController {
 
 		 else{
 			 error.setVisible(false);
-			 a=a+name.getText()+","+email.getText()+","+password.getText()+","+choices.getValue();
-			 if(choices.getValue()=="Admin") {
 				 Admin input = new Admin(email.getText(),password.getText(),name.getText());
 				 try {
 					serialize(input,choices.getValue());
