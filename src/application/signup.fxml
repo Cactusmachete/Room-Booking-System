@@ -10,19 +10,20 @@
 
 <AnchorPane prefHeight="360.0" prefWidth="534.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.signupController">
    <children>
-      <TextField layoutX="156.0" layoutY="101.0" prefHeight="31.0" prefWidth="277.0" promptText="Enter valid email address" />
+      <Label fx:id="error" layoutX="191.0" layoutY="14.0" prefHeight="21.0" prefWidth="208.0" text="Please enter vaild credentials!" textFill="#eb2e2e" />
+      <TextField fx:id="name" layoutX="156.0" layoutY="44.0" prefHeight="31.0" prefWidth="277.0" promptText="Enter full name" />
+      <TextField fx:id="email" layoutX="156.0" layoutY="101.0" prefHeight="31.0" prefWidth="277.0" promptText="Enter valid email address" />
       <Label alignment="CENTER" graphicTextGap="5.0" layoutX="35.0" layoutY="103.0" prefHeight="21.0" prefWidth="79.0" text="Email">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
+      <PasswordField fx:id="password" layoutX="156.0" layoutY="166.0" prefHeight="31.0" prefWidth="277.0" promptText="*******" />
       <Label alignment="CENTER" graphicTextGap="5.0" layoutX="35.0" layoutY="168.0" prefHeight="21.0" prefWidth="79.0" text="Password">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Button layoutX="230.0" layoutY="302.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="75.0" text="Sign up " />
-      <PasswordField layoutX="156.0" layoutY="166.0" prefHeight="31.0" prefWidth="277.0" promptText="*******" />
       <Label alignment="CENTER" graphicTextGap="5.0" layoutX="14.0" layoutY="244.0" prefHeight="27.0" prefWidth="135.0" text="Who are you?">
          <font>
             <Font size="18.0" />
@@ -33,8 +34,11 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <TextField layoutX="156.0" layoutY="44.0" prefHeight="31.0" prefWidth="277.0" promptText="Enter full name" />
+
       <ChoiceBox fx:id="choices" layoutX="156.0" layoutY="242.0" prefHeight="31.0" prefWidth="277.0" />
+      <Button fx:id="button" layoutX="230.0" layoutY="302.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="75.0" text="Sign up " />
+
+
 
    </children>
 </AnchorPane>

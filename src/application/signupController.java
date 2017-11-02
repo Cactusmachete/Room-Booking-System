@@ -13,7 +13,7 @@ public class signupController {
 	public Label error;
 	public PasswordField password;
 	public Button button;
-	String a = "";
+	public String a = "";
 
 
 	@FXML
@@ -37,7 +37,6 @@ public class signupController {
 		 else{
 			 error.setVisible(false);
 			 a=a+name.getText()+","+email.getText()+","+password.getText()+","+choices.getValue();
-		     System.out.println(a);
 		 }
 
 	 }
