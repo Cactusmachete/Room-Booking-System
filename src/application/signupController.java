@@ -73,7 +73,7 @@ public class signupController {
 		 ObjectOutputStream out = null;
 		 try {
 
-			 out = new ObjectOutputStream(new FileOutputStream("/"+type+"/"+input.name+".ser"));
+			 out = new ObjectOutputStream(new FileOutputStream(type+"/"+input.name+".ser"));
 			
 
 			 File inp = new File("User/"+type+"/"+input.email_id+".ser");
