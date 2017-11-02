@@ -1,5 +1,5 @@
 package application;
-
+import java.io.*;
 
 
 import javafx.collections.FXCollections;
@@ -17,7 +17,7 @@ public class signupController {
 
 
 	@FXML
-	public void initialize() {
+	public void initialize(){
 	    choices.getItems().removeAll(choices.getItems());
 	    choices.getItems().addAll("Admin", "Faculty", "Student");
 	    choices.getSelectionModel().select("Student");
@@ -25,7 +25,7 @@ public class signupController {
 	    error.setVisible(false);
 	}
 
-	 private void handleButtonAction(ActionEvent event) {
+	 private void handleButtonAction(ActionEvent event)  {
 
 		 if(name.getText().equals("") || email.getText().equals("") || password.getText().equals("") ||choices.getValue().equals("")){
 			 error.setVisible(true);
@@ -37,7 +37,50 @@ public class signupController {
 		 else{
 			 error.setVisible(false);
 			 a=a+name.getText()+","+email.getText()+","+password.getText()+","+choices.getValue();
+			 if(choices.getValue()=="Admin") {
+				 Admin input = new Admin(email.getText(),password.getText(),name.getText());
+				 try {
+					serialize(input,choices.getValue());
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			 }
+			 if(choices.getValue()=="Student") {
+				 Student input = new Student(email.getText(),password.getText(),name.getText());
+				 try {
+					serialize(input,choices.getValue());
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			 }
+			 if(choices.getValue()=="Faculty") {
+				 Faculty input = new Faculty(email.getText(),password.getText(),name.getText());
+				 try {
+					serialize(input,choices.getValue());
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			 }
 		 }
-
+		
+		 
+		
+	 }
+	 
+	 public static void serialize(User input,String type) throws IOException  {
+		 ObjectOutputStream out = null;
+		 try {
+			 out = new ObjectOutputStream(new FileOutputStream("/"+type+"/"+input.name+".txt"));
+			 out.writeObject(input);
+		 }
+		 catch(IOException e) {
+			 e.printStackTrace();
+		 }
+		 finally {
+			 out.close();
+		 }
 	 }
 }
