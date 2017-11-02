@@ -70,10 +70,13 @@ public class signupController {
 		
 	 }
 	 
-	 public static void serialize(User input,String type) throws IOException  {
+	  public static void serialize(User input,String type) throws IOException  {
 		 ObjectOutputStream out = null;
 		 try {
 			 out = new ObjectOutputStream(new FileOutputStream("/"+type+"/"+input.name+".ser"));
+			 File inp = new File("User/"+type+"/"+input.name+".ser");
+			 inp.createNewFile();
+			 out = new ObjectOutputStream(new FileOutputStream(inp, false));
 			 out.writeObject(input);
 		 }
 		 catch(IOException e) {
