@@ -1,6 +1,5 @@
 package application;
 
-import java.io.File;
 import java.io.IOException;
 import java.lang.ClassNotFoundException;
 import javafx.event.ActionEvent;
@@ -79,10 +78,22 @@ public class loginController {
 						throw new InvalidPasswordException(null);
 					}
 				}
-	
+
+				if(choices.getValue().equals("Student")){
+					Main.scene.change("student_dash");
+				}
+
+				else if(choices.getValue().equals("Faculty")){
+					Main.scene.change("faculty_dash");
+				}
+
+				else{
+					Main.scene.change("admin_dash");
+				}
+
 			}
 			catch(FileNotFoundException e)  {
-			
+				Main.scene.change("signup");
 			}
 			catch(ClassNotFoundException e) {
 				e.printStackTrace();
@@ -91,19 +102,15 @@ public class loginController {
 				e.printStackTrace();
 			}
 			catch(InvalidPasswordException e) {
-				
-			}
-			if(choices.getValue().equals("Student")){
-				Main.scene.change("student_dash");
+				error.setVisible(true);
 			}
 
-			else if(choices.getValue().equals("Faculty")){
-				Main.scene.change("faculty_dash");
+			finally{
+				in.close();
 			}
 
-			else{
-				Main.scene.change("admin_dash");
-			}
+
+
 
 		}
 
