@@ -73,7 +73,7 @@ public class signupController {
 	 public static void serialize(User input,String type) throws IOException  {
 		 ObjectOutputStream out = null;
 		 try {
-			 out = new ObjectOutputStream(new FileOutputStream("/"+type+"/"+input.name+".txt"));
+			 out = new ObjectOutputStream(new FileOutputStream("/"+type+"/"+input.name+".ser"));
 			 out.writeObject(input);
 		 }
 		 catch(IOException e) {
