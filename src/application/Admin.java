@@ -1,9 +1,9 @@
 package application;
 
 public class Admin extends User {
-
-	public Admin(String id, String pwd) {
-		super(id, pwd);
+	private static final long serialVersionUID = 2L;
+	public Admin(String id, String pwd,String name) {
+		super(id, pwd,name);
 
 	}
 

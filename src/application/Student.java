@@ -1,10 +1,10 @@
 package application;
 
 public class Student extends User {
-	TimeTable timetable;
+	private static final long serialVersionUID = 3L;
 
-	public Student(String id, String pwd) {
-		super(id, pwd);
+	public Student(String id, String pwd,String name) {
+		super(id, pwd,name);
 	}
 
 	public void requestRoom(Request request){
@@ -28,8 +28,5 @@ class TimeTable{
 
 }
 class Request{
-
-}
-class Course{
 
 }
