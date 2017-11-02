@@ -13,7 +13,7 @@ public class signupController {
 	public Label error;
 	public PasswordField password;
 	public Button button;
-	public String a = "";
+
 
 
 	@FXML
@@ -21,11 +21,17 @@ public class signupController {
 	    choices.getItems().removeAll(choices.getItems());
 	    choices.getItems().addAll("Admin", "Faculty", "Student");
 	    choices.getSelectionModel().select("Student");
-	    button.setOnAction(this::handleButtonAction);
+	    button.setOnAction(arg0 -> {
+			try {
+				handleButtonAction(arg0);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		});
 	    error.setVisible(false);
 	}
 
-	 private void handleButtonAction(ActionEvent event)  {
+	 private void handleButtonAction(ActionEvent event) throws IOException  {
 
 		 if(name.getText().equals("") || email.getText().equals("") || password.getText().equals("") ||choices.getValue().equals("")){
 			 error.setVisible(true);
@@ -36,6 +42,8 @@ public class signupController {
 
 		 else{
 			 error.setVisible(false);
+			 Main.scene.change("login");
+			 if(choices.getValue()=="Admin") {
 				 Admin input = new Admin(email.getText(),password.getText(),name.getText());
 				 try {
 					serialize(input,choices.getValue());
@@ -58,26 +66,21 @@ public class signupController {
 				 try {
 					serialize(input,choices.getValue());
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
+
 					e.printStackTrace();
 				}
 			 }
 		 }
-		
-		 
-		
-	 
 
-	 
-	  public static void serialize(User input,String type) throws IOException  {
+
+
+
+	 }
+
+	 public static void serialize(User input,String type) throws IOException  {
 		 ObjectOutputStream out = null;
 		 try {
-
-			 out = new ObjectOutputStream(new FileOutputStream(type+"/"+input.name+".ser"));
-			
-
-			 File inp = new File("User/"+type+"/"+input.email_id+".ser");
-
+			 File inp = new File(type+"/"+input.email_id+".ser");
 			 inp.createNewFile();
 			 out = new ObjectOutputStream(new FileOutputStream(inp, false));
 			 out.writeObject(input);
