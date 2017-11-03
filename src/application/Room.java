@@ -3,11 +3,11 @@ import java.io.*;
 public class Room implements Serializable{
 	String name;
 	int Capacity;
-	int[] Monday=new int[20];
-	int[] Tuesday= new int[20];
-	int[] Wednesday = new int[20];
-	int[] Thursday = new int[20];
-	int[] Friday = new int[20];
+	int[] Monday=new int[48];
+	int[] Tuesday= new int[48];
+	int[] Wednesday = new int[48];
+	int[] Thursday = new int[48];
+	int[] Friday = new int[48];
 	public Room(String x,int y) {
 		this.name = x;
 		this.Capacity = y;
