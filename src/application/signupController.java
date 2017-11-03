@@ -12,7 +12,7 @@ public class signupController {
 	public TextField email, name;
 	public Label error;
 	public PasswordField password;
-	public Button button;
+	public Button button, signin;
 
 
 
@@ -29,9 +29,23 @@ public class signupController {
 			}
 		});
 	    error.setVisible(false);
+
+	    signin.setOnAction(arg0 -> {
+			try {
+				handleSignInAction(arg0);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		});
+	    error.setVisible(false);
 	}
 
-	 private void handleButtonAction(ActionEvent event) throws IOException  {
+	 private void handleSignInAction(ActionEvent arg0) throws IOException {
+		 Main.scene.change("login");
+
+	}
+
+	private void handleButtonAction(ActionEvent event) throws IOException  {
 
 		 if(name.getText().equals("") || email.getText().equals("") || password.getText().equals("") ||choices.getValue().equals("")){
 			 error.setVisible(true);
@@ -57,7 +71,7 @@ public class signupController {
 				 try {
 					serialize(input,choices.getValue());
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
+
 					e.printStackTrace();
 				}
 			 }
@@ -70,7 +84,11 @@ public class signupController {
 					e.printStackTrace();
 				}
 			 }
+
+
 		 }
+
+		 password.setText("");
 
 
 
