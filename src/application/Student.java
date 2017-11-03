@@ -11,6 +11,9 @@ public class Student extends User {
 		CourseList.add(Coursename);
 	}
 	
+	public void bookroom(Room r) {
+		r.status = true;
+	}
 
 
 }

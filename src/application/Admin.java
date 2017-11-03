@@ -15,13 +15,5 @@ public class Admin extends User {
 
 	}
 
-	public void acceptRequest(Request request){
-
-	}
-
-	public void rejectRequest(Request request){
-
-	}
-
 
 }
