@@ -38,5 +38,6 @@
          </font>
       </Label>
       <Label fx:id="error" layoutX="168.0" layoutY="14.0" prefHeight="21.0" prefWidth="205.0" text="Please enter valid credentials!" textFill="#f54c4c" />
+      <Label fx:id="nouser" layoutX="138.0" layoutY="14.0" prefHeight="21.0" prefWidth="294.0" text="User does not exist! Please sign up instead" textFill="#f54c4c" />
    </children>
 </AnchorPane>
