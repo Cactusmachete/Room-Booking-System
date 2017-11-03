@@ -1,32 +1,19 @@
 package application;
-
+import java.util.*;
 public class Student extends User {
 	private static final long serialVersionUID = 3L;
-
+	ArrayList<String> CourseList;
 	public Student(String id, String pwd,String name) {
 		super(id, pwd,name);
 	}
 
-	public void requestRoom(Request request){
-
+	public void addcourse(String Coursename) {
+		CourseList.add(Coursename);
 	}
-
-	public void searchCourse(String keywords){
-
-	}
-
-	public void addToTimetable(Course course){
-
-	}
-
+	
 
 
 }
 
 
-class TimeTable{
 
-}
-class Request{
-
-}
