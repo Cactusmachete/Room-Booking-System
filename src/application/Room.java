@@ -35,17 +35,16 @@ public class Room implements Serializable{
 	public static Room[] deserialize() {
 		Room[] list = new Room[2];
 		ObjectInputStream in1 = null;
-		ObjectInputStream in2 = null;
 		try {
 			in1 = new ObjectInputStream(new FileInputStream("Room/c11.ser"));
 			Room first = (Room)in1.readObject();
-			in2 = new ObjectInputStream(new FileInputStream("Room/c01.ser"));
-			Room second = (Room)in2.readObject();
+			in1.close();
+			in1 = new ObjectInputStream(new FileInputStream("Room/c01.ser"));
+			Room second = (Room)in1.readObject();
 			list[0] = first;
 			list[1] = second;
 			in1.close();
-			in2.close();
-		
+			
 		}
 		catch(ClassNotFoundException e) {
 			e.printStackTrace();
