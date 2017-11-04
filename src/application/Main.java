@@ -15,6 +15,8 @@ public class Main extends Application {
     static Parent root;
     static nextScene scene;
     static Stage stage;
+    User meh;
+    static Room[] list;
 
 	 @Override
 	    public void start(Stage primaryStage) throws Exception {
@@ -27,10 +29,18 @@ public class Main extends Application {
 	    }
 
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
+		Room.main();
+		list = Room.deserialize();
 		launch(args);
+		for (int i=0; i<list.length; i++){
+			Room.serialize(list[i]);
+		}
+
 
 	}
+
+
 }
 
 
