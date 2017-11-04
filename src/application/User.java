@@ -19,4 +19,12 @@ public class User implements Serializable {
 
 	}
 
+	public void viewBookedRooms(){
+
+	}
+
+	public void cancelBooking(){
+
+	}
+
 }
