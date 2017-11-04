@@ -1,7 +1,7 @@
 package application;
 
 import java.io.IOException;
-
+import java.util.*;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
@@ -15,7 +15,7 @@ public class Main extends Application {
     static Parent root;
     static nextScene scene;
     static Stage stage;
-
+    static ArrayList<String> room_list = new ArrayList<String>(Arrays.asList("c01","c11"));
 	 @Override
 	    public void start(Stage primaryStage) throws Exception {
 
@@ -31,6 +31,7 @@ public class Main extends Application {
 		launch(args);
 
 	}
+	
 }
 
 
