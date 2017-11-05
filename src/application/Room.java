@@ -9,6 +9,7 @@ public class Room implements Serializable{
 	String name;
     String slot;
     String bookedBy;
+    String Purpose;
 
 	int Capacity;
 	int[] Monday=new int[48];
@@ -20,7 +21,8 @@ public class Room implements Serializable{
 
 	public Room(String x,int y) {
 		this.name = x;
-		bookedBy = null;
+		this.bookedBy = "";
+		this.Purpose="";
 		this.slot = "all";
 		this.Capacity = y;
 	}
@@ -65,6 +67,12 @@ public class Room implements Serializable{
 	public String getSlot(){
 		return (this.slot);
 	}
+
+	public String getPurpose(){
+		return (this.Purpose + " - "+ this.bookedBy);
+	}
+
+
 
 
 	public Boolean isBooked(){
