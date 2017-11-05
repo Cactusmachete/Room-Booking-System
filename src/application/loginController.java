@@ -13,7 +13,7 @@ public class loginController {
 	public PasswordField password;
 	public Button signin, signup;
 	public Label error, nouser;
-	public static String user;
+	public static User user;
 
 	@FXML
 	public void initialize(){
@@ -67,12 +67,14 @@ public class loginController {
 					if(!input.password.equals(password.getText())) {
 						throw new InvalidPasswordException(null);
 					}
+					user = input;
 				}
 				else if(choices.getValue()=="Student") {
 					Student input = (Student) in.readObject();
 					if(!input.password.equals(password.getText())) {
 						throw new InvalidPasswordException(null);
 					}
+					user = input;
 					
 				}
 				else {
@@ -80,8 +82,9 @@ public class loginController {
 					if(!input.password.equals(password.getText())) {
 						throw new InvalidPasswordException(null);
 					}
+					user = input;
 				}
-				user = choices.getValue()+"/"+email.getText()+".ser";
+	;
 				if(choices.getValue().equals("Student")){
 					Main.scene.change("student_dash");
 				}

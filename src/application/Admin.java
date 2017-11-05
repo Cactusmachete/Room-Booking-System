@@ -11,9 +11,20 @@ public class Admin extends User {
 
 	}
 
-	public void bookRoom(){
+	public void bookRoom(Room room){
+		room.status = true;
+		room.bookedBy = this.email_id;
+	}
+
+
+
+	/*public void acceptRequest(Request request){
 
 	}
 
+	public void rejectRequest(Request request){
+
+	}
+*/
 
 }

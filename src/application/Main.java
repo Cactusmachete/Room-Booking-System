@@ -1,7 +1,7 @@
 package application;
 
 import java.io.IOException;
-import java.util.*;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
@@ -15,11 +15,13 @@ public class Main extends Application {
     static Parent root;
     static nextScene scene;
     static Stage stage;
-    static ArrayList<String> room_list = new ArrayList<String>(Arrays.asList("c01","c11"));
+    User meh;
+    static Room[] list;
+
 	 @Override
 	    public void start(Stage primaryStage) throws Exception {
 
-		    root= FXMLLoader.load(getClass().getResource("login.fxml"));
+		root= FXMLLoader.load(getClass().getResource("login.fxml"));
 	        scene = new nextScene(root);
 	        stage = primaryStage;
 	        stage.setScene(scene);
@@ -27,11 +29,18 @@ public class Main extends Application {
 	    }
 
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
+		Room.main();
+		list = Room.deserialize();
 		launch(args);
+		for (int i=0; i<list.length; i++){
+			Room.serialize(list[i]);
+		}
+
 
 	}
-	
+
+
 }
 
 
