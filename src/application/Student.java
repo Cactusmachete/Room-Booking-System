@@ -10,13 +10,9 @@ public class Student extends User {
 	public void addcourse(String Coursename) {
 		CourseList.add(Coursename);
 	}
-	
-	public void bookroom(Room r) {
-		r.status = true;
-	}
+
+
+
 
 
 }
-
-
-

@@ -62,7 +62,6 @@ public class signupController {
 				 try {
 					serialize(input,choices.getValue());
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			 }

@@ -15,15 +15,8 @@ public class User implements Serializable {
 		return (email_id.equals(id) && password.equals(pwd));
 	}
 
-	public void viewRoomAvail(){
-
-	}
-
-	public void viewBookedRooms(){
-
-	}
-
-	public void cancelBooking(){
+	public void cancelBooking(Room room, String date){
+		room.cancelBooking(date);
 
 	}
 

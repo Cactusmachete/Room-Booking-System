@@ -7,13 +7,8 @@ public class Admin extends User {
 
 	}
 
-	public void cancelBooking(){
-
-	}
-
-	public void bookRoom(Room room){
-		room.status = true;
-		room.bookedBy = this.email_id;
+	public void bookRoom(Room room, String date){
+		room.Book(date, this.email_id, "" );
 	}
 
 
