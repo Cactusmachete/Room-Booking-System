@@ -1,4 +1,5 @@
 package application;
+import java.util.*;
 import java.io.*;
 import java.util.*;
 
@@ -9,10 +10,8 @@ public class Room implements Serializable{
 	private static final long serialVersionUID = 10L;
 	String name;
     String slot;
-
-
 	int Capacity;
-	Map<String, Day> Dates = new HashMap<String, Day>();
+	ArrayList<String> dates = new ArrayList<String>();
 	Boolean status = false;
 
 	public Room(String x,int y) {
@@ -38,13 +37,8 @@ public class Room implements Serializable{
 	 }
 
 
-	public Day getInstance(String key){
-		if(Dates.containsKey(key)==false){
-			Day day = new Day(key);
-			Dates.put(key,day);
-
-		}
-		return Dates.get(key);
+	public static void bookroom(String date,String start,String end) {
+		
 	}
 
 	public static void main() {
@@ -72,27 +66,7 @@ public class Room implements Serializable{
 		return (this.slot);
 	}
 
-	public String getPurpose(String date){
-		Day day = this.getInstance(date);
-		return (day.Purpose + " (Booking by "+ day.bookedBy+")");
-
-	}
-
-	public Boolean isBooked(String date){
-		Day day = this.getInstance(date);
-		return (day.isBooked());
-	}
-
-	public String BookedBy(String date){
-		Day day = this.getInstance(date);
-		return (day.bookedBy);
-	}
-
-	public void Book(String date, String bookedBy, String purpose){
-		Day day = this.getInstance(date);
-		day.book(bookedBy, purpose);
-
-	}
+	
 
 	public static Room[] deserialize() {
 		Room[] list = new Room[2];
@@ -117,11 +91,6 @@ public class Room implements Serializable{
 		return list;
 	}
 
-	public void cancelBooking(String date) {
-		Day day = this.getInstance(date);
-		day.cancel();
-
-	}
-
+	
 
 }
