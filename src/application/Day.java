@@ -14,10 +14,6 @@ public class Day implements Serializable {
 	int[] slots = new int[48];
 
 
-	public Day(String date) {
-		this.date = date;
-	}
-
 	public String toString() {
 		 return this.date;
 	}
