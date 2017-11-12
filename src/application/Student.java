@@ -15,11 +15,5 @@ public class Student extends User {
 	public void addcourse(String Coursename) {
 		CourseList.add(Coursename);
 	}
-	
-	
-
-
-
-
 
 }

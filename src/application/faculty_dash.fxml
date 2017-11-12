@@ -6,12 +6,11 @@
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
 <AnchorPane prefHeight="574.0" prefWidth="816.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.facultyController">
    <children>
-      <TabPane prefHeight="574.0" prefWidth="816.0" tabClosingPolicy="UNAVAILABLE">
+      <TabPane layoutY="-4.0" prefHeight="574.0" prefWidth="816.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
           <Tab text="Booked Rooms">
                <content>
@@ -21,13 +20,13 @@
                            <children>
                               <TableView fx:id="bookedTable" prefHeight="536.0" prefWidth="816.0">
                               <placeholder>
-        						<Label text="You have no booked rooms!" />
+        						<Label text="There are no booked rooms!" />
     						  </placeholder>
                                 <columns>
-                                  <TableColumn fx:id="bookedRoom" prefWidth="223.0" text="Room Booked" />
-                                  <TableColumn fx:id="bookedCap" minWidth="6.0" prefWidth="249.0" text="Capacity" />
-                                  <TableColumn fx:id="bookedSlot" minWidth="0.0" prefWidth="195.0" text="Slot" />
-                                  <TableColumn fx:id="bookedCancel" prefWidth="148.0" text="Cancellation" />
+                                  <TableColumn fx:id="bookedRoom" editable="false" prefWidth="109.0" style="-fx-alignment: CENTER;" text="Room Booked" />
+                                  <TableColumn fx:id="bookedCap" editable="false" style="-fx-alignment: CENTER;" text="Capacity" />
+                                  <TableColumn fx:id="bookedSlot" editable="false" prefWidth="549.0" style="-fx-alignment: CENTER;" text="Slot" />
+                                  <TableColumn fx:id="bookedCancel" editable="false" prefWidth="76.0" style="-fx-alignment: CENTER;" />
                                 </columns>
                               </TableView>
                            </children>
@@ -40,30 +39,30 @@
                <content>
                   <AnchorPane prefHeight="200.0" prefWidth="200.0">
                      <children>
-                        <AnchorPane layoutY="34.0" prefHeight="501.0" prefWidth="816.0">
+                        <AnchorPane prefHeight="374.0" prefWidth="673.0">
                          <children>
-                              <TableView fx:id="availTable" layoutY="19.0" prefHeight="477.0" prefWidth="816.0">
+                              <TableView fx:id="availTable" layoutY="50.0" prefHeight="485.0" prefWidth="816.0">
                               	<placeholder>
         							<Label text="There are no available rooms!" />
     						  	</placeholder>
                                 <columns>
-                                  <TableColumn fx:id="availRoomNum" prefWidth="192.0" text="Room Number" />
-                                  <TableColumn fx:id="availCap" prefWidth="151.0" text="Capacity" />
-                                  <TableColumn fx:id="availSlot" prefWidth="327.0" text="Available Slots" />
-                                    <TableColumn fx:id="availBook" prefWidth="145.0" text="Column X" />
+                                  <TableColumn fx:id="availRoomNum" editable="false" prefWidth="115.0" style="-fx-alignment: CENTER;" text="Room Number" />
+                                  <TableColumn fx:id="availCap" editable="false" prefWidth="78.0" style="-fx-alignment: CENTER;" text="Capacity" />
+                                  <TableColumn fx:id="availSlot" editable="false" prefWidth="555.0" style="-fx-alignment: CENTER;" text="Available Slots" />
+                                    <TableColumn fx:id="availBook" editable="false" prefWidth="67.0" style="-fx-alignment: CENTER;" />
                                 </columns>
                               </TableView>
+                              <Button fx:id="viewDate" layoutX="370.0" layoutY="11.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="148.0" text="View Other Dates" />
+                              <Label layoutX="17.0" layoutY="16.0" prefHeight="21.0" prefWidth="237.0" text="Showing Available Rooms for:" />
+                              <Label fx:id="dateLabel" layoutX="229.0" layoutY="16.0" prefHeight="21.0" prefWidth="124.0" text="Label" />
+                              <Button fx:id="availGo" layoutX="533.0" layoutY="11.0" mnemonicParsing="false" text="Go" />
                            </children>
                           </AnchorPane>
-                        <Label layoutX="52.0" layoutY="19.0" prefHeight="21.0" prefWidth="196.0" text="Check Availability for    Date:" />
-                        <TextField fx:id="availDate" layoutX="253.0" layoutY="11.0" promptText="dd/mm/yyyy" />
-                        <Button fx:id="availGo" layoutX="462.0" layoutY="11.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="50.0" text="Go" />
                      </children>
                   </AnchorPane>
                </content>
             </Tab>
-
-        </tabs>
+          </tabs>
       </TabPane>
       <Button layoutX="737.0" layoutY="4.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="76.0" text="Log out" />
    </children>

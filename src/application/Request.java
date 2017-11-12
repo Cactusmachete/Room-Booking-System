@@ -8,10 +8,10 @@ public class Request implements Serializable {
 	String purpose;
 	int Capacity;
 	public Request(Student Requester,String purpose,int capacity) {
-		this.Requester = Requester; 
+		this.Requester = Requester;
 		this.purpose = purpose;
 		this.Capacity = capacity;
-		
+
 	}
 	public static void serialize(Request request) throws IOException  {
 		 ObjectOutputStream out = null;
@@ -51,7 +51,7 @@ public class Request implements Serializable {
 			e.printStackTrace();
 		}
 		return adminrequestlist;
-		
+
 	}
-	
+
 }

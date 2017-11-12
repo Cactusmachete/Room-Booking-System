@@ -7,8 +7,8 @@ public class Admin extends User {
 
 	}
 
-	public void bookRoom(Room room, String date){
-		room.Book(date, this.email_id, "" );
+	public void bookRoom(Room room, String date, String fromHrs, String fromMins, String toHrs, String toMins){
+		room.Book(date,fromHrs, fromMins, toHrs, toMins, this, "");
 	}
 
 

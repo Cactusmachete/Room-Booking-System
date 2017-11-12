@@ -1,19 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="168.0" prefWidth="478.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.141" fx:controller="application.bookRoomControllerAdmin">
+<AnchorPane prefHeight="282.0" prefWidth="478.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.bookRoomControllerAdmin">
    <children>
       <Label layoutX="64.0" layoutY="33.0" prefHeight="40.0" prefWidth="385.0" text="Which slot would you like to book for?">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Button fx:id="bookYes" layoutX="121.0" layoutY="99.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="78.0" text="Yes" />
-      <Button fx:id="bookNo" layoutX="239.0" layoutY="99.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="78.0" text="No" />
+      <Button fx:id="bookYes" layoutX="297.0" layoutY="214.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="78.0" text="Book" />
+      <Button fx:id="bookNo" layoutX="99.0" layoutY="214.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="78.0" text="Cancel" />
+      <ChoiceBox fx:id="fromHrs" layoutX="129.0" layoutY="94.0" prefWidth="72.0" />
+      <ChoiceBox fx:id="fromMins" layoutX="261.0" layoutY="94.0" prefWidth="72.0" />
+      <ChoiceBox fx:id="toHrs" layoutX="129.0" layoutY="155.0" prefWidth="72.0" />
+      <ChoiceBox fx:id="toMins" layoutX="261.0" layoutY="155.0" prefWidth="72.0" />
+      <Label layoutX="29.0" layoutY="99.0" prefHeight="21.0" prefWidth="78.0" text="From  Hrs:" />
+      <Label layoutX="29.0" layoutY="160.0" prefHeight="21.0" prefWidth="78.0" text="To      Hrs:" />
+      <Label layoutX="219.0" layoutY="99.0" prefHeight="21.0" prefWidth="41.0" text="Mins:" />
+      <Label layoutX="219.0" layoutY="160.0" prefHeight="21.0" prefWidth="41.0" text="Mins:" />
    </children>
 </AnchorPane>

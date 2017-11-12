@@ -1,6 +1,10 @@
 package application;
 
+
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.YearMonth;
+import java.time.format.DateTimeFormatter;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -16,10 +20,14 @@ public class Main extends Application {
     static nextScene scene;
     static Stage stage;
     static Room[] list;
+    static DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    static LocalDateTime now = LocalDateTime.now();
+
+    static String date =  dtf.format(now) ;
+
 
 	 @Override
 	    public void start(Stage primaryStage) throws Exception {
-
 		    root= FXMLLoader.load(getClass().getResource("login.fxml"));
 	        scene = new nextScene(root);
 	        stage = primaryStage;
@@ -29,13 +37,14 @@ public class Main extends Application {
 
 
 	public static void main(String[] args) throws IOException {
-		Room.main();
+		/*Room.main();*/
 		list = Room.deserialize();
 		launch(args);
 		for (int i=0; i<list.length; i++){
 			Room.serialize(list[i]);
 		}
 	}
+
 }
 
 
@@ -66,6 +75,15 @@ class nextScene extends Scene{
 
 	 }
 
+	 public void showCal(){
 
+	  final Stage dialog = new Stage();
+	        dialog.initModality(Modality.APPLICATION_MODAL);
+	        dialog.initOwner(Main.stage);
+	        dialog.setScene(new Scene(new FullCalendarView(YearMonth.now()).getView()));
+	        dialog.show();
+
+	 }
 
 }
+

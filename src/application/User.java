@@ -15,8 +15,8 @@ public class User implements Serializable {
 		return (email_id.equals(id) && password.equals(pwd));
 	}
 
-	public void cancelBooking(Room room, String date){
-		room.cancelBooking(date);
+	public void cancelBooking(Room room, String date, Booking booking){
+		room.cancelBooking(date, booking);
 
 	}
 

@@ -5,11 +5,10 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
-public class cancelBookingControllerFaculty {
+public class cancelBookingControllerStudent {
 	public Button cancelYes;
 	public Button cancelNo;
 	static Room room;
-	static Booking booking;
 
 	@FXML
 	 public void initialize() {
@@ -28,7 +27,7 @@ public class cancelBookingControllerFaculty {
 
 	 private void handleCancelAction(ActionEvent arg0) {
 
-		facultyController.cancel(booking);
+		studentController.cancel(room);
 		Stage stage = (Stage) cancelYes.getScene().getWindow();
 		stage.close();
 

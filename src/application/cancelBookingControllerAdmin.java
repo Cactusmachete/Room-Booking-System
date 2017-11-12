@@ -9,6 +9,7 @@ public class cancelBookingControllerAdmin {
 	public Button cancelYes;
 	public Button cancelNo;
 	static Room room;
+	static Booking booking;
 
 	@FXML
 	 public void initialize() {
@@ -27,7 +28,7 @@ public class cancelBookingControllerAdmin {
 
 	 private void handleCancelAction(ActionEvent arg0) {
 
-		adminController.cancel(room);
+		adminController.cancel(booking);
 		Stage stage = (Stage) cancelYes.getScene().getWindow();
 		stage.close();
 
