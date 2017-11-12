@@ -8,8 +8,10 @@ public class Day implements Serializable {
 	private static final long serialVersionUID = 500L;
 	String date;
 	int[] Status = new int[48];
+
 	ArrayList<Booking> booking = new ArrayList<Booking>();
 	int[] slots = new int[48];
+
 
 
 	public Day(String date) {
@@ -131,6 +133,8 @@ public class Day implements Serializable {
 
 		this.booking.remove(booking);
 	}
+	
+	
 
 }
 
