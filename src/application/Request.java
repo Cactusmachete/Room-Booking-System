@@ -12,6 +12,7 @@ public class Request implements Serializable {
 		this.purpose = purpose;
 		this.Capacity = capacity;
 		Requester.RequestList.add(this);
+		Requester.numofrequest++;
 	}
 	public static void serialize(Request request) throws IOException  {
 		 ObjectOutputStream out = null;
