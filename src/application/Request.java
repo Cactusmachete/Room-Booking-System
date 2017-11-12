@@ -11,7 +11,7 @@ public class Request implements Serializable {
 		this.Requester = Requester;
 		this.purpose = purpose;
 		this.Capacity = capacity;
-
+		Requester.RequestList.add(this);
 	}
 	public static void serialize(Request request) throws IOException  {
 		 ObjectOutputStream out = null;
@@ -38,7 +38,7 @@ public class Request implements Serializable {
 				File innerhello = new File("Reqest/"+list[i]);
 				String[] innerlist = innerhello.list();
 				for(int j = 0;j<innerlist.length;j++){
-					in = new ObjectInputStream(new FileInputStream(""+j));
+					in = new ObjectInputStream(new FileInputStream("Request/"+list[i]+j));
 					Request yay = (Request) in.readObject();
 					adminrequestlist.add(yay);
 				}

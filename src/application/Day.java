@@ -2,13 +2,13 @@ package application;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-
+import java.util.Calendar;
+import java.util.Date;
 public class Day implements Serializable {
 
 	private static final long serialVersionUID = 500L;
 	String date;
 	int[] Status = new int[48];
-
 	ArrayList<Booking> booking = new ArrayList<Booking>();
 	int[] slots = new int[48];
 
@@ -16,6 +16,14 @@ public class Day implements Serializable {
 
 	public Day(String date) {
 		this.date = date;
+		int year = Integer.valueOf(date.substring(6,10));
+		int month = Integer.valueOf(date.substring(3,5));
+		int day =  Integer.valueOf(date.substring(0,2));
+		Date current = new Date(year,month,day);
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(current);
+		int dayoftheweek = cal.get(Calendar.DAY_OF_WEEK);
+		
 	}
 
 	public String toString() {
