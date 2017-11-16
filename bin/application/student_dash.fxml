@@ -12,7 +12,6 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="574.0" prefWidth="816.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.studentController">
    <children>
@@ -29,11 +28,11 @@
         						<Label text="You have no booked rooms!" />
     						  </placeholder>
                                 <columns>
-                                  <TableColumn fx:id="bookedRoom" prefWidth="130.0" text="Room Booked" />
-                                  <TableColumn fx:id="bookedPurpose" prefWidth="373.0" text="Purpose of Booking" />
-                                  <TableColumn fx:id="bookedCap" prefWidth="103.0" text="Capacity" />
-                                  <TableColumn fx:id="bookedSlot" prefWidth="101.0" text="Slot" />
-                                  <TableColumn prefWidth="108.0" text="Cancellation" />
+                                  <TableColumn fx:id="bookedRoom" prefWidth="55.0" text="Room " />
+                                  <TableColumn fx:id="bookedPurpose" prefWidth="396.0" text="Purpose of Booking" />
+                                  <TableColumn fx:id="bookedCap" prefWidth="72.0" text="Capacity" />
+                                  <TableColumn fx:id="bookedSlot" prefWidth="206.0" text="Slot" />
+                                  <TableColumn fx:id="bookedCancel" prefWidth="86.0" />
                                 </columns>
                               </TableView>
                            </children>
@@ -48,47 +47,53 @@
                      <children>
                         <AnchorPane prefHeight="374.0" prefWidth="673.0">
                          <children>
-                              <TableView fx:id="availTable" prefHeight="535.0" prefWidth="816.0">
+                              <TableView fx:id="availTable" layoutY="54.0" prefHeight="481.0" prefWidth="816.0">
                               	<placeholder>
         							<Label text="There are no available rooms!" />
     						  	</placeholder>
                                 <columns>
-                                  <TableColumn fx:id="availRoomNum" prefWidth="155.0" text="Room Number" />
-                                  <TableColumn fx:id="availCap" prefWidth="147.0" text="Capacity" />
-                                  <TableColumn fx:id="availSlot" prefWidth="513.0" text="Available Slots" />
+                                  <TableColumn fx:id="availRoomNum" prefWidth="121.0" text="Room Number" />
+                                  <TableColumn fx:id="availCap" prefWidth="89.0" text="Capacity" />
+                                  <TableColumn fx:id="availSlot" prefWidth="605.0" text="Available Slots" />
                                 </columns>
                               </TableView>
+                              <Label layoutX="14.0" layoutY="17.0" prefHeight="21.0" prefWidth="131.0" text="Showing rooms for" />
+                              <Label fx:id="dateLabel" layoutX="145.0" layoutY="17.0" prefHeight="21.0" prefWidth="107.0" text="Label" />
+                              <Button fx:id="viewDate" layoutX="257.0" layoutY="12.0" mnemonicParsing="false" text="View Other Dates" />
+                              <Button fx:id="availGo" layoutX="414.0" layoutY="12.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="48.0" text="Go" />
                            </children>
                           </AnchorPane>
                      </children>
                   </AnchorPane>
                </content>
             </Tab>
-            <Tab text="Request Room ">
+            <Tab text="Request Room">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <AnchorPane prefHeight="535.0" prefWidth="816.0">
+                        <AnchorPane prefHeight="537.0" prefWidth="816.0">
                            <children>
-                              <TextArea fx:id="purpose" layoutX="205.0" layoutY="178.0" prefHeight="149.0" prefWidth="386.0" />
-                              <Label contentDisplay="CENTER" layoutX="30.0" layoutY="35.0" prefHeight="24.0" prefWidth="141.0" text="Required Capacity*" />
-                              <TextField fx:id="capacity" layoutX="210.0" layoutY="32.0" prefHeight="31.0" prefWidth="63.0" promptText="eg: 42" />
-                              <Label contentDisplay="CENTER" layoutX="21.0" layoutY="178.0" prefHeight="24.0" prefWidth="147.0" text="Purpose of Booking*" />
-                              <Label contentDisplay="CENTER" layoutX="32.0" layoutY="374.0" prefHeight="24.0" prefWidth="124.0" text="Preferred Room" />
-                              <TextField fx:id="prefRoom" layoutX="205.0" layoutY="370.0" prefHeight="31.0" prefWidth="72.0" promptText="eg:  C01" />
-                              <Label layoutX="32.0" layoutY="112.0" prefHeight="14.0" prefWidth="92.0" text="Slot*" />
-                              <TextField fx:id="date" layoutX="210.0" layoutY="107.0" prefHeight="31.0" prefWidth="149.0" promptText="dd/mm/yyyy" />
-                              <Label layoutX="149.0" layoutY="112.0" prefHeight="21.0" prefWidth="38.0" text="Date" />
-                              <Label layoutX="398.0" layoutY="112.0" prefHeight="21.0" prefWidth="38.0" text="Time" />
-                              <Label layoutX="30.0" layoutY="494.0" prefHeight="21.0" prefWidth="128.0" text="* Required Fields ">
-                                 <font>
-                                    <Font size="12.0" />
-                                 </font>
-                              </Label>
-                              <Button fx:id="request" layoutX="675.0" layoutY="439.0" mnemonicParsing="false" text="Submit" />
-                              <ChoiceBox fx:id="timeFrom" layoutX="452.0" layoutY="107.0" prefHeight="31.0" prefWidth="83.0" />
-                              <Label layoutX="553.0" layoutY="112.0" prefHeight="21.0" prefWidth="22.0" text="to" />
-                              <ChoiceBox fx:id="timeTo" layoutX="591.0" layoutY="107.0" prefHeight="31.0" prefWidth="83.0" />
+                              <Label layoutX="44.0" layoutY="39.0" prefHeight="31.0" prefWidth="45.0" text="Date:" />
+                              <Button fx:id="reqViewDate" layoutX="246.0" layoutY="39.0" mnemonicParsing="false" text="View Other Dates" />
+                              <Label layoutX="46.0" layoutY="175.0" prefHeight="21.0" prefWidth="35.0" text="Slot" />
+                              <ChoiceBox fx:id="fromHrs" layoutX="181.0" layoutY="170.0" prefHeight="31.0" prefWidth="62.0" />
+                              <ChoiceBox fx:id="fromMins" layoutX="293.0" layoutY="170.0" prefHeight="31.0" prefWidth="62.0" />
+                              <ChoiceBox fx:id="toHrs" layoutX="425.0" layoutY="170.0" prefHeight="31.0" prefWidth="62.0" />
+                              <ChoiceBox fx:id="toMins" layoutX="534.0" layoutY="170.0" prefHeight="31.0" prefWidth="62.0" />
+                              <Label layoutX="109.0" layoutY="175.0" prefHeight="21.0" prefWidth="60.0" text="from Hrs" />
+                              <Label layoutX="255.0" layoutY="175.0" prefHeight="21.0" prefWidth="37.0" text="Mins" />
+                              <Label layoutX="370.0" layoutY="175.0" prefHeight="21.0" prefWidth="47.0" text="to  Hrs" />
+                              <Label layoutX="497.0" layoutY="175.0" prefHeight="21.0" prefWidth="37.0" text="Mins" />
+                              <TextArea fx:id="reqPurposeField" layoutX="104.0" layoutY="228.0" prefHeight="134.0" prefWidth="377.0" />
+                              <Label layoutX="32.0" layoutY="236.0" prefHeight="21.0" prefWidth="63.0" text="Purpose" />
+                              <ChoiceBox fx:id="reqPrefRoom" layoutX="105.0" layoutY="397.0" prefHeight="31.0" prefWidth="76.0" />
+                              <Label layoutX="32.0" layoutY="402.0" prefHeight="21.0" prefWidth="63.0" text="Room*" />
+                              <Label layoutX="32.0" layoutY="502.0" prefHeight="21.0" prefWidth="214.0" text="* Optional Fields" />
+                              <Button fx:id="reqSubmit" layoutX="658.0" layoutY="480.0" mnemonicParsing="false" text="Submit Request" />
+                              <Button fx:id="reqGo" layoutX="417.0" layoutY="39.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="48.0" text="Go" />
+                              <Label fx:id="reqDate" layoutX="113.0" layoutY="39.0" prefHeight="31.0" prefWidth="134.0" text="Date:" />
+                              <Label layoutX="25.0" layoutY="112.0" prefHeight="21.0" prefWidth="64.0" text="Capacity" />
+                              <TextField fx:id="reqCapacity" layoutX="105.0" layoutY="107.0" prefHeight="31.0" prefWidth="70.0" promptText="eg: 100" />
                            </children>
                         </AnchorPane>
                      </children>
@@ -101,15 +106,17 @@
                      <children>
                         <AnchorPane prefHeight="368.0" prefWidth="673.0">
                            <children>
-                              <TableView prefHeight="535.0" prefWidth="816.0">
+                              <TableView fx:id="reqTable" prefHeight="535.0" prefWidth="816.0">
                               	<placeholder>
         							<Label text="You have not requested any rooms!" />
     						  	</placeholder>
                                 <columns>
-                                  <TableColumn prefWidth="207.0" text="Requested Room" />
-                                  <TableColumn prefWidth="230.0" text="Capacity" />
-                                  <TableColumn prefWidth="195.0" text="Slot" />
-                                  <TableColumn minWidth="0.0" prefWidth="183.0" text="Status" />
+                                  <TableColumn fx:id="reqRoom" prefWidth="51.0" text="Room" />
+                                  <TableColumn fx:id="reqPurpose" prefWidth="350.0" text="Purpose" />
+                                  <TableColumn fx:id="reqCap" prefWidth="69.0" text="Capacity" />
+                                  <TableColumn fx:id="reqSlot" minWidth="0.0" prefWidth="174.0" text="Slot" />
+                                  <TableColumn fx:id="reqStatus" prefWidth="89.0" text="Status" />
+                                  <TableColumn fx:id="reqCancel" prefWidth="82.0" />
 								</columns>
                               </TableView>
                            </children>
@@ -149,12 +156,12 @@
                      <children>
                         <AnchorPane prefHeight="535.0" prefWidth="816.0">
                            <children>
-                              <TextField layoutX="450.0" layoutY="14.0" prefHeight="31.0" prefWidth="271.0" promptText="Enter post conditions" />
-                              <Button layoutX="750.0" layoutY="14.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="47.0" text="Go" />
+                              <TextField fx:id="searchBox" layoutX="450.0" layoutY="14.0" prefHeight="31.0" prefWidth="271.0" promptText="Enter post conditions" />
+                              <Button fx:id="searchGo" layoutX="750.0" layoutY="14.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="47.0" text="Go" />
                               <Separator layoutX="-6.0" layoutY="56.0" prefHeight="5.0" prefWidth="828.0" />
                               <AnchorPane layoutY="55.0" prefHeight="479.0" prefWidth="816.0">
                                  <children>
-                                    <ListView layoutX="172.0" layoutY="61.0" prefHeight="479.0" prefWidth="816.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <ListView fx:id="listView" layoutX="172.0" layoutY="61.0" prefHeight="479.0" prefWidth="816.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                     	<placeholder>
         									<Label text="No results to show!" />
     						  			</placeholder>
@@ -169,6 +176,6 @@
 
         </tabs>
       </TabPane>
-      <Button layoutX="737.0" layoutY="4.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="76.0" text="Log out" />
+      <Button fx:id="logOut" layoutX="737.0" layoutY="4.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="76.0" text="Log out" />
    </children>
 </AnchorPane>
