@@ -8,7 +8,7 @@ public class Faculty extends User {
 	}
 
 	public void bookRoom(Room room, String date, String fromHrs, String fromMins, String toHrs, String toMins){
-		room.Book(date,fromHrs, fromMins, toHrs, toMins, this, "");
+		room.Book(date,fromHrs, fromMins, toHrs, toMins, this.email_id, "");
 	}
 
 }

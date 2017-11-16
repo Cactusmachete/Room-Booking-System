@@ -12,20 +12,24 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 public class adminController {
-	public Button availGo, viewDate;
+	public Button availGo, viewDate, logOut;
 	public Label dateLabel;
 	public TableView<Room> availTable;
 	public TableView<Booking> bookedTable;
+	public TableView<Request> reqTable;
 	public TableColumn<Room, String> availRoomNum, availSlot;
 	public TableColumn <Booking, String> bookedRoom, bookedPurpose, bookedSlot;
+	public TableColumn <Request, String> reqRoom, reqPurpose, reqSlot;
 	public TableColumn<Room, Room>  availBook;
+	public TableColumn<Request, Request> reqManage;
 	public TableColumn<Booking, Booking> bookedCancel;
 	public TableColumn<Room, Integer>availCap;
 	public TableColumn<Booking, Integer> bookedCap;
-	static Room[] list = Main.list;
+	public TableColumn<Request, Integer> reqCapacity;
 	static Admin user = (Admin) loginController.user;
 	static ObservableList<Room> avail_data = FXCollections.observableArrayList();
 	static ObservableList<Booking> booked_data = FXCollections.observableArrayList();
+	static ObservableList<Request> req_data = FXCollections.observableArrayList();
 
 
 	    @FXML
@@ -36,6 +40,7 @@ public class adminController {
 	    	availBook.setCellValueFactory(
 		            param -> new ReadOnlyObjectWrapper<>(param.getValue())
 		        );
+
 		        availBook.setCellFactory(param -> new TableCell<Room, Room>() {
 		            private final Button bookButton = new Button("Book");
 
@@ -63,9 +68,11 @@ public class adminController {
 		        });
 
 
-	        bookedCancel.setCellValueFactory(
-	            param -> new ReadOnlyObjectWrapper<>(param.getValue())
-	        );
+		        bookedCancel.setCellValueFactory(
+			            param -> new ReadOnlyObjectWrapper<>(param.getValue())
+			        );
+
+
 	        bookedCancel.setCellFactory(param -> new TableCell<Booking,Booking>() {
 	            private final Button deleteButton = new Button("Cancel");
 
@@ -86,24 +93,57 @@ public class adminController {
 						} catch (IOException e) {
 							e.printStackTrace();
 						}
-
 	                });
-
 	            }
 	        });
 
+	        reqManage.setCellValueFactory(
+		            param -> new ReadOnlyObjectWrapper<>(param.getValue())
+		        );
 
-	        for(int i=0; i<list.length; i++){
-					avail_data.add(list[i]);
-					ArrayList<Booking> booking = list[i].getBooking();
+		        reqManage.setCellFactory(param -> new TableCell<Request, Request>() {
+		            private final Button bookButton = new Button("Manage");
+
+		            @Override
+		            protected void updateItem(Request request, boolean empty) {
+		                super.updateItem(request, empty);
+
+		                if (request == null) {
+		                    setGraphic(null);
+		                    return;
+		                }
+
+		                setGraphic(bookButton);
+		                bookButton.setOnAction(arg0 ->{
+		                	try {
+								handleManageAction(arg0, request);
+							} catch (IOException e) {
+								e.printStackTrace();
+							}
+		                });
+		            }
+		        });
+
+
+
+	        for(int i=0; i<Main.list.length; i++){
+					avail_data.add(Main.list[i]);
+					ArrayList<Booking> booking = Main.list[i].getBooking();
 					if(booking.size()>0){
 						for(int j=0; j<booking.size(); j++){
-							if(booked_data.contains(booking.get(i))==false){
-								booked_data.add(booking.get(i));
+							if(booked_data.contains(booking.get(j))==false){
+								booked_data.add(booking.get(j));
 							}
 						}
 					}
 			}
+
+	        Admin.requests = Request.deserialize1();
+	        for(int i=0; i<Admin.requests.size(); i++){
+	        	if(Admin.requests.get(i).RequestStatus==0){
+	        		req_data.add(Admin.requests.get(i));
+	        	}
+	        }
 
 	        availRoomNum.setCellValueFactory(new PropertyValueFactory<Room, String>("name"));
 	        availCap.setCellValueFactory(new PropertyValueFactory<Room, Integer>("capacity"));
@@ -114,8 +154,14 @@ public class adminController {
 	        bookedSlot.setCellValueFactory(new PropertyValueFactory<Booking, String>("slot"));
 	        bookedPurpose.setCellValueFactory(new PropertyValueFactory<Booking, String>("purpose"));
 
+	        reqRoom.setCellValueFactory(new PropertyValueFactory<Request, String>("name"));
+	        reqCapacity.setCellValueFactory(new PropertyValueFactory<Request, Integer>("capacity"));
+	        reqSlot.setCellValueFactory(new PropertyValueFactory<Request, String>("slot"));
+	        reqPurpose.setCellValueFactory(new PropertyValueFactory<Request, String>("purpose"));
+
 	        bookedTable.setItems(booked_data);
 	        availTable.setItems(avail_data);
+	        reqTable.setItems(req_data);
 
 	        availGo.setOnAction(arg0 ->{
             	handleGoAction(arg0);
@@ -126,15 +172,29 @@ public class adminController {
 	        	Main.scene.showCal();
             });
 
+	        logOut.setOnAction(arg0 ->{
+	        	try {
+					handleLogOutAction(arg0);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+            });
+
 
 	    }
+
+	    private void handleManageAction(ActionEvent arg0, Request request) throws IOException {
+			Main.scene.openDialog("manage_req");
+			manageReqController.request=request;
+
+		}
 
 
 	    private void handleGoAction(ActionEvent arg0) {
 	    	dateLabel.setText(Main.date);
 	    	avail_data.clear();
-			for(int i=0; i<list.length; i++){
-					avail_data.add(list[i]);
+			for(int i=0; i<Main.list.length; i++){
+					avail_data.add(Main.list[i]);
 			}
 		}
 
@@ -154,9 +214,8 @@ public class adminController {
 		static void book(Room room){
 			booked_data.add(room.getBooking().get(room.getBooking().size()-1));
 			avail_data.clear();
-			for(int i=0; i<list.length; i++){
-					avail_data.add(list[i]);
-
+			for(int i=0; i<Main.list.length; i++){
+					avail_data.add(Main.list[i]);
 			}
 		}
 
@@ -167,7 +226,14 @@ public class adminController {
 			avail_data.add(booking.room);
 		}
 
-
+		private void handleLogOutAction(ActionEvent arg0) throws IOException {
+			Main.scene.change("logged_out");
+			try {
+				Admin.serialize(user);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
 
 }
 

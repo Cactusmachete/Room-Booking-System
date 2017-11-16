@@ -69,16 +69,16 @@
                      <children>
                         <AnchorPane prefHeight="368.0" prefWidth="673.0">
                            <children>
-                              <TableView prefHeight="535.0" prefWidth="816.0">
+                              <TableView fx:id="reqTable" prefHeight="535.0" prefWidth="816.0">
                               	<placeholder>
         							<Label text="There are no booking requests!" />
     						  	</placeholder>
                                 <columns>
-                                  <TableColumn editable="false" prefWidth="139.0" style="-fx-alignment: CENTER;" text="Preferred Room" />
-                                  <TableColumn editable="false" prefWidth="328.0" style="-fx-alignment: CENTER;" text="Purpose of Booking" />
-                                  <TableColumn editable="false" prefWidth="74.0" style="-fx-alignment: CENTER;" text="Capacity" />
-                                  <TableColumn editable="false" minWidth="0.0" prefWidth="126.0" style="-fx-alignment: CENTER;" text="Slot" />
-                                  <TableColumn editable="false" prefWidth="148.0" style="-fx-alignment: CENTER;" text="Accept/Reject" />
+                                  <TableColumn fx:id="reqRoom" editable="false" prefWidth="66.0" style="-fx-alignment: CENTER;" text="Room" />
+                                  <TableColumn fx:id="reqPurpose" editable="false" prefWidth="371.0" style="-fx-alignment: CENTER;" text="Purpose of Booking" />
+                                  <TableColumn fx:id="reqCapacity" editable="false" prefWidth="72.0" style="-fx-alignment: CENTER;" text="Capacity" />
+                                  <TableColumn fx:id="reqSlot" editable="false" minWidth="0.0" prefWidth="224.0" style="-fx-alignment: CENTER;" text="Slot" />
+                                  <TableColumn fx:id="reqManage" editable="false" prefWidth="82.0" style="-fx-alignment: CENTER;" />
 								</columns>
                               </TableView>
                            </children>
@@ -90,6 +90,6 @@
 
         </tabs>
       </TabPane>
-      <Button layoutX="737.0" layoutY="4.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="76.0" text="Log out" />
+      <Button fx:id="logOut" layoutX="737.0" layoutY="4.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="76.0" text="Log out" />
    </children>
 </AnchorPane>

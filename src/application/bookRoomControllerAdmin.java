@@ -1,7 +1,5 @@
 package application;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -11,15 +9,10 @@ public class bookRoomControllerAdmin {
 	static Room room;
 	public Button bookYes, bookNo;
 	public ChoiceBox<String> fromHrs, fromMins, toHrs, toMins;
-	static ObservableList<String> Hrs = FXCollections.observableArrayList();
-	static ObservableList<String> Mins = FXCollections.observableArrayList();
 
 	 @FXML
 	 public void initialize() {
 
-		 /*Hrs.removeAll();
-		 Hrs.addAll("00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13",
-				 "14", "15", "16", "17", "18", "19", "20","21","22","23");*/
 
 		 fromHrs.getItems().removeAll(fromHrs.getItems());
 		 fromMins.getItems().removeAll(fromMins.getItems());

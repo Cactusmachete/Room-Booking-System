@@ -1,29 +1,48 @@
 package application;
 
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+
 public class Day implements Serializable {
 
 	private static final long serialVersionUID = 500L;
 	String date;
 	int[] Status = new int[48];
+	String[] day = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday"};
 	ArrayList<Booking> booking = new ArrayList<Booking>();
-	int[] slots = new int[48];
-
-
 
 	public Day(String date) {
+		DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+		Date d=null;
 		this.date = date;
-		int year = Integer.valueOf(date.substring(6,10));
-		int month = Integer.valueOf(date.substring(3,5));
-		int day =  Integer.valueOf(date.substring(0,2));
-		Date current = new Date(year,month,day);
-		Calendar cal = Calendar.getInstance();
-		cal.setTime(current);
-		int dayoftheweek = cal.get(Calendar.DAY_OF_WEEK);
-		
+		try {
+			d = formatter.parse(date);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		Main.c.setTime(d);
+		int ok = Main.c.get(Calendar.DAY_OF_WEEK);
+		if(ok!=1 && ok!=7){
+			for(int i=0; i<Main.course_list.size(); i++){
+				Course course = Main.course_list.get(i);
+				ArrayList<Classes> mlem = course.classes.get(day[ok-2]);
+				if(mlem!=null){
+					for(int j=0; j<mlem.size(); j++){
+						if(mlem.get(j)!=null){
+							Classes z = mlem.get(j);
+							if(z.room!=null){
+								this.bookRoom(z.startHour, z.startMin, z.endHour, z.endMin, z.courseName, "", z.room);
+							}
+						}
+					}
+				}
+			}
+		}
 	}
 
 	public String toString() {
@@ -32,7 +51,7 @@ public class Day implements Serializable {
 
 
 
-	public void bookRoom(String startHour,String startMin, String endHour, String endMin, User user, String purpose, Room room) {
+	public void bookRoom(String startHour,String startMin, String endHour, String endMin, String user, String purpose, Room room) {
 		int initialhour = Integer.valueOf(startHour);
 		int endhour = Integer.valueOf(endHour);
 		int initialindex = 2*initialhour;
@@ -46,20 +65,20 @@ public class Day implements Serializable {
 		try {
 			int check = 0;
 			for(int i = initialindex;i<=endindex;i++) {
-				if(Status[i]==1) {
+				if(this.Status[i]==1) {
 					check = 1;
 					throw new AlreadyBookedException("");
 				}
 			}
 			if(check==0) {
 				for(int i = initialindex;i<=endindex;i++) {
-					Status[i] = 1;
+					this.Status[i] = 1;
 
 				}
 			}
 			String slot = startHour+":"+startMin+" - "+endHour+":"+endMin;
-			System.out.println(slot);
-			Booking book = new Booking(slot,user.email_id, purpose, room);
+			/*System.out.println(slot);*/
+			Booking book = new Booking(slot,user, purpose, room);
 			booking.add(book);
 		}
 		catch(AlreadyBookedException e) {
@@ -141,8 +160,6 @@ public class Day implements Serializable {
 
 		this.booking.remove(booking);
 	}
-	
-	
 
 }
 

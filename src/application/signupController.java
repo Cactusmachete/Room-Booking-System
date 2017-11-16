@@ -2,7 +2,6 @@ package application;
 import java.io.*;
 
 
-import javafx.collections.FXCollections;
 import javafx.event.*;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;

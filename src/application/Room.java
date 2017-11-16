@@ -80,7 +80,7 @@ public class Room implements Serializable{
 		return day.getBooking();
 	}
 
-	public void Book(String date, String fromHrs, String fromMins, String toHrs, String toMins, User user, String purpose){
+	public void Book(String date, String fromHrs, String fromMins, String toHrs, String toMins, String user, String purpose){
 		Day day = this.getInstance(date);
 		day.bookRoom(fromHrs, fromMins, toHrs, toMins, user, purpose, this);
 		day.getSlots();

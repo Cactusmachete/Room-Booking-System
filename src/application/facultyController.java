@@ -22,7 +22,6 @@ public class facultyController {
 	public TableColumn<Booking, Booking> bookedCancel;
 	public TableColumn<Room, Integer>availCap;
 	public TableColumn<Booking, Integer> bookedCap;
-	static Room[] list = Main.list;
 	static Faculty user = (Faculty) loginController.user;
 	static ObservableList<Room> avail_data = FXCollections.observableArrayList();
 	static ObservableList<Booking> booked_data = FXCollections.observableArrayList();
@@ -35,10 +34,11 @@ public class facultyController {
 	    public void initialize() {
 
 	    	dateLabel.setText(Main.date);
-
 	    	availBook.setCellValueFactory(
 		            param -> new ReadOnlyObjectWrapper<>(param.getValue())
 		        );
+
+
 		        availBook.setCellFactory(param -> new TableCell<Room, Room>() {
 		            private final Button bookButton = new Button("Book");
 
@@ -65,10 +65,11 @@ public class facultyController {
 		            }
 		        });
 
-
 		        bookedCancel.setCellValueFactory(
 			            param -> new ReadOnlyObjectWrapper<>(param.getValue())
 			        );
+
+
 			        bookedCancel.setCellFactory(param -> new TableCell<Booking,Booking>() {
 			            private final Button deleteButton = new Button("Cancel");
 
@@ -96,13 +97,13 @@ public class facultyController {
 			        });
 
 
-			for(int i=0; i<list.length; i++){
-				avail_data.add(list[i]);
-				ArrayList<Booking> booking = list[i].getBooking();
+			for(int i=0; i<Main.list.length; i++){
+				avail_data.add(Main.list[i]);
+				ArrayList<Booking> booking = Main.list[i].getBooking();
 					if(booking.size()>0){
 						for(int j=0; j<booking.size(); j++){
-							if(booked_data.contains(booking.get(i))==false){
-								booked_data.add(booking.get(i));
+							if(booked_data.contains(booking.get(j))==false){
+								booked_data.add(booking.get(j));
 							}
 						}
 					}
@@ -135,8 +136,8 @@ public class facultyController {
 	    private void handleGoAction(ActionEvent arg0) {
 	    	dateLabel.setText(Main.date);
 	    	avail_data.clear();
-			for(int i=0; i<list.length; i++){
-					avail_data.add(list[i]);
+			for(int i=0; i<Main.list.length; i++){
+					avail_data.add(Main.list[i]);
 			}
 		}
 
@@ -156,8 +157,8 @@ public class facultyController {
 
 			booked_data.add(room.getBooking().get(room.getBooking().size()-1));
 			avail_data.clear();
-			for(int i=0; i<list.length; i++){
-					avail_data.add(list[i]);
+			for(int i=0; i<Main.list.length; i++){
+					avail_data.add(Main.list[i]);
 
 			}
 		}
