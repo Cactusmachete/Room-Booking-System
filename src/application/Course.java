@@ -4,10 +4,13 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.io.ObjectInputStream;
 import java.io.*;
+import java.util.*;
 public class Course implements Serializable {
 	private static final long serialVersionUID = 456L;
 	String ManEl;
@@ -92,11 +95,14 @@ public class Course implements Serializable {
 
 
 	public static void main() throws IOException  {
-		Course first = new Course("Mandatory,Discrete Mathematics,CSE121,Dhongoon Chang,4,DM,-,1:30-3:00$C21,$4:00-5:30$S01,-,11:30-1:00$C21$$4:00-5:30$LR1$$4:00-5:30$LR2$$4:00-5:30$LR3, mlem");
-		Course second = new Course("Mandatory,Advanced Programming,CSE201,Vivek Kumar,4,AP,11:00-12:00$C21$$12:00-1:00$LR1$$12:00-1:00$LR2$$12:00-1:00$S01$$12:00-1:00$S02,-,11:00-12:00$C21,11:00-12:00$C21$/$12:00-1:00$L21$/$12:00-1:00$L22$/$12:00-1:00$L23,-, nomlem");
 		try {
-			serialize(first);
-			serialize(second);
+			String filename = "courses.csv";
+			List<String> courselines = Files.readAllLines(Paths.get(filename));
+			for(int i = 0;i<courselines.size();i++) {
+				Course output = new Course(courselines.get(i));
+				serialize(output);
+			}
+			
 		}
 		catch(IOException e) {
 			e.printStackTrace();
