@@ -33,7 +33,6 @@ public class Student extends User {
 			 out = new ObjectOutputStream(new FileOutputStream(inp, false));
 			 out.writeObject(user);
 		 }
-
 		 catch(IOException e) {
 			 e.printStackTrace();
 		 }
@@ -41,9 +40,9 @@ public class Student extends User {
 			 if(out!=null){
 				 out.close();
 			 }
-
 		 }
 	 }
+
 	
 	public void AddCourse(Course c) {
 		if(AddCoursehelper(mon,c,"Monday")) {
@@ -52,18 +51,18 @@ public class Student extends User {
 					if(AddCoursehelper(thur,c,"Thursday")) {
 						if(AddCoursehelper(fri,c,"Friday")) {
 							AddCoursehelpertwo(mon,c,"Monday");
-							AddCoursehelper(tue,c,"Tuesday");
-							AddCoursehelper(wed,c,"Wednesday");
-							AddCoursehelper(thur,c,"Thursday");
-							AddCoursehelper(fri,c,"Friday");
+							AddCoursehelpertwo(tue,c,"Tuesday");
+							AddCoursehelpertwo(wed,c,"Wednesday");
+							AddCoursehelpertwo(thur,c,"Thursday");
+							AddCoursehelpertwo(fri,c,"Friday");
 						}
 					}
 				}
-				
 			}
 		}
 	}
 	
+
 	public boolean AddCoursehelper(Course[] henlo,Course C,String day) {
 		ArrayList<Classes> innerhenlo = C.classes.get(day);
 		if(innerhenlo!=null) {
@@ -79,25 +78,16 @@ public class Student extends User {
 					if(Integer.valueOf(input.endMin)==30) {
 						endindex = endindex + 1;
 					}
-				
-						
-						for(int j = initialindex;j<=endindex;j++) {
-							if(henlo[j]!=null) {
-								return false;
-							}
+					for(int j = initialindex;j<=endindex;j++) {
+						if(henlo[j]!=null) {
+							return false;
 						}
-				
-				
-					
-					
-				
-				
+					}
 			}
 		}
-		
 		return true;
 	}
-	
+
 	public void AddCoursehelpertwo(Course[] henlo,Course C,String day) {
 		ArrayList<Classes> innerhenlo = C.classes.get(day);
 		if(innerhenlo!=null) {
@@ -117,17 +107,11 @@ public class Student extends User {
 					for(int j = initialindex;j<=endindex;i++) {
 						henlo[j] = C;
 					}
-						
 				}
-				
-					
-				
-				
 			}
 		}
-		
 	}
-	
+
 	public void DropCourse(Course c) {
 		DropCoursehelper(c,mon);
 		DropCoursehelper(c,tue);
@@ -135,6 +119,7 @@ public class Student extends User {
 		DropCoursehelper(c,thur);
 		DropCoursehelper(c,fri);
 	}
+
 	
 	public void DropCoursehelper(Course c,Course[] henlo) {
 		for(int i = 0;i<henlo.length;i++) {
@@ -143,10 +128,8 @@ public class Student extends User {
 					henlo[i] = null;
 				}
 			}
-			
 		}
 	}
-
 }
 
 class ClassClashException extends Exception {
