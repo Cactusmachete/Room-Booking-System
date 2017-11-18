@@ -69,9 +69,8 @@ public class Day implements Serializable {
 	 * @param user		username who made the booking
 	 * @param purpose	purpose of booking
 	 * @param room		Room object which is to be booked
-	 * @throws AlreadyBookedException
 	 */
-	public void bookRoom(String startHour,String startMin, String endHour, String endMin, String user, String purpose, Room room) throws AlreadyBookedException {
+	public void bookRoom(String startHour,String startMin, String endHour, String endMin, String user, String purpose, Room room){
 		int initialhour = Integer.valueOf(startHour);
 		int endhour = Integer.valueOf(endHour);
 		int initialindex = 2*initialhour;
@@ -82,12 +81,14 @@ public class Day implements Serializable {
 		if(Integer.valueOf(endMin)==30) {
 			endindex = endindex + 1;
 		}
-
+		try {
 			int check = 0;
 			for(int i = initialindex;i<=endindex;i++) {
 				if(this.Status[i]==1) {
 					check = 1;
-					throw new AlreadyBookedException("");
+
+						throw new AlreadyBookedException("");
+
 				}
 			}
 			if(check==0) {
@@ -99,6 +100,10 @@ public class Day implements Serializable {
 			String slot = startHour+":"+startMin+" - "+endHour+":"+endMin;
 			Booking book = new Booking(slot,user, purpose, room);
 			booking.add(book);
+		} catch (AlreadyBookedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 
 	}
