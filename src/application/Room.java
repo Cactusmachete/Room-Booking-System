@@ -51,7 +51,7 @@ public class Room implements Serializable{
 
 	public Day getInstance(String key){
 		if(Dates.containsKey(key)==false){
-			Day day = new Day(key);
+			Day day = new Day(key, this);
 			Dates.put(key,day);
 
 		}
