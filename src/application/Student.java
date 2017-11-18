@@ -128,7 +128,7 @@ public class Student extends User {
 						endindex = endindex + 1;
 					}
 					for(int j = initialindex;j<endindex;j++) {
-						if(henlo[j]!=null/* && henlo[j+1]!=null*/){
+						if(henlo[j]!=null){
 							if(henlo[j].toString.endsWith(innerhenlo.get(i).room_name)==false && henlo[j].isWhat==innerhenlo.get(i).isWhat){
 								henlo[j].toString+=","+innerhenlo.get(i).room_name;
 							}
@@ -163,7 +163,7 @@ public class Student extends User {
 	public void DropCoursehelper(Course c,Classes[] henlo) {
 		for(int i = 0;i<henlo.length;i++) {
 			if(henlo[i]!=null) {
-				if(henlo[i].courseName.equals(c.Name)) {
+				if(henlo[i].courseName.equals(c.Acronym)) {
 					henlo[i] = null;
 				}
 			}
