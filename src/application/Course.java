@@ -1,4 +1,10 @@
 package application;
+/**
+ * <h1>The Course Class </h1>
+ * Class representing object of type Course. Contains whether a course is mandatory/elective,name,course code,Instructor name
+ * number of credits,Acronym of course and post conditions of course
+ * @author Rohan Chhokra
+ */
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -64,19 +70,13 @@ public class Course implements Serializable {
 			}
 		}
 
-/*
-		for(int i=0; i<5; i++){
-			ArrayList<Classes> list = this.classes.get(day[i]);
-			System.out.println(day[i]);
-			if (list!=null){
-				for(int j=0; j<list.size(); j++){
-					System.out.println(list.get(j));
-				}
-			}
-			System.out.println();
-		}*/
-	}
 
+	}
+	/**
+	 * Function for serializing a course
+	 * @param course which is to be serialized into a file at Course/Course.code.ser
+	 * @throws IOException
+	 */
 	public static void serialize(Course course) throws IOException  {
 		 ObjectOutputStream out = null;
 		 try {
@@ -109,12 +109,17 @@ public class Course implements Serializable {
 		}
 
 	}
-
+	/**
+	 * toString function for course
+	 */
 	public String toString(){
 		return (this.ManEl+"\n"+this.Instructor+"\n"+this.post_conditions);
 	}
 
-
+	/**
+	 * Function for deserializing the courses. 
+	 * @return ArrayList<Course> for a list of courses
+	 */
 	public static ArrayList<Course> deserialize() {
 		ArrayList<Course> courselist = new ArrayList<Course>();
 		ObjectInputStream in = null;
