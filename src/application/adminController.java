@@ -253,7 +253,7 @@ public class adminController {
 		}
 	
 		/**
-	   	 * Books room for admin and refreshes dashboard to display real time changes.
+	   	 * Deletes room booking for admin and refreshes dashboard to display real time changes.
 		* @param booking object to be cancelled.
 	    	*/
 
