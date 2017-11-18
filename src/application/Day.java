@@ -21,7 +21,8 @@ public class Day implements Serializable {
 	String[] day = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday"};
 	ArrayList<Booking> booking = new ArrayList<Booking>();
 
-	public Day(String date) {
+	public Day(String date, Room room) {
+		this.room = room;
 		DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
 		Date d=null;
 		this.date = date;
@@ -41,7 +42,10 @@ public class Day implements Serializable {
 						if(mlem.get(j)!=null){
 							Classes z = mlem.get(j);
 							if(z.room!=null){
-								this.bookRoom(z.startHour, z.startMin, z.endHour, z.endMin, z.courseName, "", z.room);
+								if(z.room.name.equals(this.room.name)){
+									this.bookRoom(z.startHour, z.startMin, z.endHour, z.endMin, z.courseName, "", z.room);
+
+								}
 							}
 						}
 					}
