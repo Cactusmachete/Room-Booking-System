@@ -1,4 +1,8 @@
-package application;
+package application; 
+/** 
+* This is not our code.
+* @author https://github.com/SirGoose3432
+*/
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
