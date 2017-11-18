@@ -156,9 +156,10 @@
         						<Label text="You have not taken any courses!" />
     						  </placeholder>
                                  <columns>
-                                    <TableColumn fx:id="courseCode" prefWidth="106.0" text="Code" style="-fx-alignment: CENTER;" />
-                                    <TableColumn fx:id="courseName" prefWidth="233.0" text="Name" style="-fx-alignment: CENTER;" />
-                                    <TableColumn fx:id="courseDetails" prefWidth="476.0"  style="-fx-alignment: CENTER;"/>
+                                    <TableColumn fx:id="courseCode" prefWidth="106.0" style="-fx-alignment: CENTER;" text="Code" />
+                                    <TableColumn fx:id="courseName" prefWidth="233.0" style="-fx-alignment: CENTER;" text="Name" />
+                                    <TableColumn fx:id="courseDetails" prefWidth="366.0" style="-fx-alignment: CENTER;" />
+                                    <TableColumn fx:id="courseDel" prefWidth="110.0" style="-fx-alignment: CENTER;" />
                                  </columns>
                               </TableView>
                            </children>
