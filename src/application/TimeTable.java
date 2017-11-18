@@ -1,4 +1,8 @@
 package application;
+/** The TimeTable Class
+* takes the String objects for time, and Student's classes at that current time
+* used in studentController
+*/
 
 public class TimeTable {
 	String slot, mon, tue, wed, thu, fri;
