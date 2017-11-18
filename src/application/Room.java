@@ -2,7 +2,7 @@ package application;
 /**
  * <h1>The Room Class</h1>
  * Class which represents an object of type Room, name,slot,capacity,Dates whwich is a HashMap
- * 
+ *
  * @author Rohan Chhokra
  *
  */
@@ -59,14 +59,18 @@ public class Room implements Serializable{
 	}
 
 	public static void main() {
-		Room first = new Room("C01",120);
-		Room second = new Room("C21",100);
-		try {
-			serialize(first);
-			serialize(second);
-		}
-		catch(IOException e) {
-			e.printStackTrace();
+		String[] list = {"C01", "C02", "C03", "C04", "C11", "C12", "C13", "C14", "C21", "C22", "C23", "C24",
+				"LR1", "LR2", "LR3", "S01", "S02"};
+		for(int i=0; i<list.length; i++){
+			Room room = new Room(list[i], 100);
+			try {
+				serialize(room);
+
+			}
+			catch(IOException e) {
+				e.printStackTrace();
+			}
+
 		}
 
 	}
@@ -124,17 +128,21 @@ public class Room implements Serializable{
 	 * @return returns a list of all deserialized rooms
 	 */
 	public static Room[] deserialize() {
-		Room[] list = new Room[2];
-		ObjectInputStream in1 = null;
+		Room[] list_o = new Room[17];
+		ObjectInputStream in = null;
 		try {
-			in1 = new ObjectInputStream(new FileInputStream("Room/C21.ser"));
-			Room first = (Room)in1.readObject();
-			in1.close();
-			in1 = new ObjectInputStream(new FileInputStream("Room/C01.ser"));
-			Room second = (Room)in1.readObject();
-			list[0] = first;
-			list[1] = second;
-			in1.close();
+			File hello = new File("Room/");
+			String[] list = hello.list();
+			if(list.length>0){
+				for(int i = 0;i<list.length;i++) {
+
+
+						in = new ObjectInputStream(new FileInputStream("Room/"+list[i]));
+						Room yay = (Room) in.readObject();
+						list_o[i]=yay;
+					}
+
+				}
 
 		}
 		catch(ClassNotFoundException e) {
@@ -143,12 +151,14 @@ public class Room implements Serializable{
 		catch(IOException e) {
 			e.printStackTrace();
 		}
-		return list;
+		return list_o;
+
 	}
+
 	/**
 	 * Function to cancel a booking
 	 * @param date date string
-	 * @param booking booking object to be cancelled 
+	 * @param booking booking object to be cancelled
 	 */
 	public void cancelBooking(String date, Booking booking) {
 		Day day = this.getInstance(date);
