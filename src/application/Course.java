@@ -103,7 +103,10 @@ public class Course implements Serializable {
 			 out.close();
 		 }
 	 }
-
+	 /**
+	 * Function for serializing all courses on setup. 
+	 * @throws IOException
+	 */
 
 	public static void main() throws IOException  {
 		try {
