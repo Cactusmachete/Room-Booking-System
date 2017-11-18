@@ -1,4 +1,10 @@
 package application;
+/**
+ * <h1> The Classes Class </h1>
+ * This class is used in the Course class and the Student class
+ * Stores course acronym in courseName
+ * @author Ahilya Sinha
+ */
 
 import java.io.Serializable;
 
@@ -50,7 +56,9 @@ public class Classes implements Serializable {
 		}
 		this.toString = this.courseName+" "+ is[isWhat]+" "+this.room_name;
 	}
-
+	 /**
+     	* Gives the String representation of the class represented by String toStrin
+     	*/
 	public String toString(){
 		return toString;
 	}
