@@ -2,7 +2,6 @@ package application;
 
 import java.io.IOException;
 import java.util.ArrayList;
-
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -10,24 +9,32 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.GridPane;
+import javafx.scene.text.*;
 
 public class studentController{
 	public Button availGo, viewDate, reqViewDate, reqSubmit, reqGo, logOut, searchGo;
-	public Label dateLabel, reqDate;
+	public Label dateLabel, reqDate, clashError, detailError, timeError, searchError;
 	public TextField reqCapacity, searchBox;
 	public TextArea reqPurposeField;
 	public TableView<Room> availTable;
 	public TableView<Booking> bookedTable;
 	public TableView<Request> reqTable;
+	public TableView<TimeTable> timeTable;
+	public TableView<Course> courseTable;
 	public TableColumn<Room, String> availRoomNum, availSlot;
 	public TableColumn<Booking, String> bookedRoom, bookedPurpose, bookedSlot;
 	public TableColumn<Request, String> reqRoom, reqPurpose, reqStatus, reqSlot;
+	public TableColumn<TimeTable, String> monClass, tueClass, wedClass, thuClass, friClass;
+	public TableColumn<TimeTable, String> timeSlot;
+	public TableColumn <Course, String> courseName, courseCode;
 	public TableColumn<Room, Integer>availCap;
 	public TableColumn<Booking, Integer> bookedCap;
 	public TableColumn<Request, Integer> reqCap;
 	public TableColumn <Room, Room> availBook;
 	public TableColumn<Booking, Booking> bookedCancel;
 	public TableColumn<Request, Request> reqCancel;
+	public TableColumn<Course, Course> courseDetails;
 	public ChoiceBox<String> fromHrs, fromMins, toHrs, toMins, reqPrefRoom;
 	public ListView<Course> listView;
 	static Student user = (Student) loginController.user;
@@ -36,6 +43,10 @@ public class studentController{
 	static ObservableList<Request> req_data = FXCollections.observableArrayList();
 	static ObservableList<String> room_data = FXCollections.observableArrayList();
 	static ObservableList<Course> course_data = FXCollections.observableArrayList();
+	static ObservableList<Course> user_courses = FXCollections.observableArrayList();
+	static ObservableList<TimeTable> time_data = FXCollections.observableArrayList();
+	static ObservableList<String> time = FXCollections.observableArrayList();
+
 
 
 
@@ -59,7 +70,13 @@ public class studentController{
 
 
 
+
 		user.requests = Request.deserialize2(user.email_id);
+
+		clashError.setVisible(false);
+		detailError.setVisible(false);
+		timeError.setVisible(false);
+		searchError.setVisible(false);
 
 		bookedCancel.setCellValueFactory(
 			            param -> new ReadOnlyObjectWrapper<>(param.getValue())
@@ -121,11 +138,78 @@ public class studentController{
                 	handleRequestCancelAction(arg0, request);
                 });
             }
+        });
+
+        courseDetails.setCellValueFactory(
+	            param -> new ReadOnlyObjectWrapper<>(param.getValue())
+	        );
+
+
+	        courseDetails.setCellFactory(param -> new TableCell<Course, Course>() {
+	            private final Button bookButton = new Button("View Details");
+
+	            @Override
+	            protected void updateItem(Course course, boolean empty) {
+	                super.updateItem(course, empty);
+
+	                if (course == null) {
+	                    setGraphic(null);
+	                    return;
+	                }
+
+	                setGraphic(bookButton);
+	                bookButton.setOnAction(arg0 ->{
+	                	try {
+							handleViewDetailAction(arg0, course);
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+
+	                });
+
+	            }
+
+	        });
 
 
 
+        listView.setCellFactory(param -> new ListCell<Course>(){
+        	private final Button addButton = new Button("Join");
+        	private final GridPane pane = new GridPane();
+        	private final Label data = new Label();
+        	private final Label spacer = new Label();
+
+
+        	@Override
+        	public void updateItem(Course course, boolean empty) {
+        		super.updateItem(course, empty);
+
+        		data.setPrefWidth(listView.getWidth()*0.85);
+        		spacer.setPrefWidth(listView.getWidth()*0.05);
+        		data.setTextAlignment(TextAlignment.JUSTIFY);
+        		pane.prefWidthProperty().bind(listView.widthProperty());
+        		data.setWrapText(true);
+        		pane.getChildren().clear();
+        	    pane.add(data, 0, 0);
+        	    pane.add(spacer, 1,0);
+        		pane.add(addButton, 2, 0);
+
+                setText(null);
+        		setEditable(false);
+        		if (course != null) {
+        			data.setText(course.toString());
+        			addButton.setOnAction(arg0 ->{
+                		handleAddCourseAction(arg0, course);
+                	});
+        			setGraphic(pane);
+        		} else {
+        			setGraphic(null);
+        		}
+        	}
 
         });
+
+
 
 
 			for(int i=0; i<Main.list.length; i++){
@@ -145,14 +229,22 @@ public class studentController{
 
 			user.requests=Request.deserialize2(user.email_id);
 			req_data.addAll(user.requests);
-			/*for(int i=0; i<user.requests.size(); i++){
-				req_data.add(user.requests.get(i));
-			}*/
+			user_courses.addAll(user.CourseList);
+
+
+			time.addAll("08:30", "09:00", "10:00", "10:30", "11:00", "11:30", "12:00", "12:30",
+					"13:00", "13:30", "14:00", "14:30", "15:00", "15:30", "16:00", "16:30", "17:00",
+					"17:30", "18:00");
+
+			makelist();
+
 
 			reqPrefRoom.getItems().removeAll();
 			reqPrefRoom.getItems().addAll(room_data);
 			reqPrefRoom.getItems().add("");
 			reqPrefRoom.getSelectionModel().select("");
+
+
 
 	        availRoomNum.setCellValueFactory(new PropertyValueFactory<Room, String>("name"));
 	        availCap.setCellValueFactory(new PropertyValueFactory<Room, Integer>("capacity"));
@@ -172,7 +264,17 @@ public class studentController{
 	        reqStatus.setCellValueFactory(new PropertyValueFactory<Request, String>("status"));
 	        reqTable.setItems(req_data);
 
+	        monClass.setCellValueFactory(new PropertyValueFactory<TimeTable, String>("mon"));
+	        tueClass.setCellValueFactory(new PropertyValueFactory<TimeTable, String>("tue"));
+	        wedClass.setCellValueFactory(new PropertyValueFactory<TimeTable, String>("wed"));
+	        thuClass.setCellValueFactory(new PropertyValueFactory<TimeTable, String>("thu"));
+	        friClass.setCellValueFactory(new PropertyValueFactory<TimeTable, String>("fri"));
+	        timeSlot.setCellValueFactory(new PropertyValueFactory<TimeTable, String>("time"));
+	        timeTable.setItems(time_data);
 
+	        courseName.setCellValueFactory(new PropertyValueFactory<Course, String>("name"));
+	        courseCode.setCellValueFactory(new PropertyValueFactory<Course, String>("code"));
+	        courseTable.setItems(user_courses);
 
 	        availGo.setOnAction(arg0 ->{
             	handleGoAction(arg0);
@@ -212,17 +314,78 @@ public class studentController{
 
 	}
 
-	private void handleSearchAction(ActionEvent arg0) {
+	private void makelist() {
+		time_data.clear();
+		for(int i=0; i<time.size(); i++){
+			String mon, tue, wed, thu, fri;
+			if(user.mon[i+18]==null){mon="";}
+			else{
+				mon = user.mon[i+18].toString;
+			}
+			if(user.tue[i+18]==null){tue="";}
+			else{
+				tue = user.tue[i+18].toString;
+			}
+			if(user.wed[i+18]==null){wed="";}
+			else{
+				wed = user.wed[i+18].toString;
+			}
+			if(user.thur[i+18]==null){thu="";}
+			else{
+				thu = user.thur[i+18].toString;
+			}
+			if(user.fri[i+18]==null){fri="";}
+			else{
+				fri = user.fri[i+18].toString;
+			}
+			TimeTable table = new TimeTable(time.get(i), mon, tue,wed, thu, fri);
+			time_data.add(table);
+		}
 
-		course_data.clear();
-		for(int i=0; i<Main.course_list.size(); i++){
-			String[] terms = searchBox.getText().split("\\s+");
-			for(int j=0; j<terms.length; j++){
-				if(Main.course_list.get(i).post_conditions.contains(terms[j])){
-					course_data.add(Main.course_list.get(i));
-					break;
+	}
+
+	private void handleViewDetailAction(ActionEvent arg0, Course course) throws IOException {
+		viewDetailsController.course = course;
+		Main.scene.openDialog("viewDetails");
+	}
+
+	private void handleAddCourseAction(ActionEvent arg0, Course course) {
+		try {
+			clashError.setVisible(false);
+			user.AddCourse(course);
+			user.CourseList.add(course);
+			user_courses.add(course);
+			makelist();
+			timeTable.setItems(time_data);
+			course_data.remove(course);
+		} catch (ClassClashException e) {
+			clashError.setVisible(true);
+		}
+		finally{
+			searchBox.setText("");
+		}
+	}
+
+	private void handleSearchAction(ActionEvent arg0) {
+		clashError.setVisible(false);
+		searchError.setVisible(false);
+		if(searchBox.getText().isEmpty() || searchBox.getText().matches("\\s+")){
+			searchError.setVisible(true);
+		}
+		else{
+			searchError.setVisible(false);
+			course_data.clear();
+			for(int i=0; i<Main.course_list.size(); i++){
+				String[] terms = searchBox.getText().split("\\s+");
+				for(int j=0; j<terms.length; j++){
+					if(user_courses.contains(Main.course_list.get(i))==false &&
+							Main.course_list.get(i).post_conditions.toLowerCase().contains(terms[j].toLowerCase())){
+							course_data.add(Main.course_list.get(i));
+							break;
+					}
 				}
 			}
+			searchBox.setText("");
 		}
 	}
 
@@ -241,14 +404,49 @@ public class studentController{
 	}
 
 	private void handleRequestAction(ActionEvent arg0) {
-		Request request = new Request(user, reqPurposeField.getText(), Integer.parseInt(reqCapacity.getText()),
+
+		if(reqPurposeField.getText().isEmpty() || reqCapacity.getText().isEmpty() || isNumeric(reqCapacity.getText())==false
+				|| fromHrs.getValue()==null || fromMins.getValue()==null || toHrs.getValue()==null ||
+				toMins.getValue()==null){
+			timeError.setVisible(false);
+			detailError.setVisible(true);
+		}
+
+		else{
+			int fromhrs = Integer.parseInt(fromHrs.getValue());
+			int frommin = Integer.parseInt(fromMins.getValue());
+			int tohrs = Integer.parseInt(toHrs.getValue());
+			int tomins = Integer.parseInt(toMins.getValue());
+			if(fromhrs>tohrs || (fromhrs==tohrs && frommin>=tomins)){
+				detailError.setVisible(false);
+				timeError.setVisible(true);
+			}
+
+			else{
+				timeError.setVisible(false);
+				detailError.setVisible(false);
+				Request request = new Request(user, reqPurposeField.getText(), Integer.parseInt(reqCapacity.getText()),
 						reqPrefRoom.getValue(), fromHrs.getValue(), fromMins.getValue(),
 						toHrs.getValue(), toMins.getValue());
-		System.out.println(request.getName());
-		user.requests.add(request);
-		req_data.add(request);
+				System.out.println(request.getName());
+				user.requests.add(request);
+				req_data.add(request);
+				reqPurposeField.setText("");
+				reqCapacity.setText("");
+				fromHrs.setValue(null);
+				fromMins.setValue(null);
+				toHrs.setValue(null);
+				toMins.setValue(null);
+				reqPrefRoom.setValue("");
+			}
+		}
 	}
 
+
+	private boolean isNumeric(String text) {
+		return text != null && text.matches("[-+]?\\d*\\.?\\d+");
+
+	}
 
 	private void handleLogOutAction(ActionEvent arg0) throws IOException {
 		Main.scene.change("logged_out");
@@ -259,7 +457,8 @@ public class studentController{
 		}
 	}
 
-	private void handleGoAction(ActionEvent arg0) {
+	private void handleGoAction(ActionEvent arg0){
+
     	dateLabel.setText(Main.date);
     	reqDate.setText(Main.date);
     	avail_data.clear();

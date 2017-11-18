@@ -40,9 +40,9 @@ public class Main extends Application {
 
 
 	public static void main(String[] args) throws IOException {
-		/*Room.main();*/
+		Room.main();
 		list = Room.deserialize();
-		/*Course.main();*/
+		Course.main();
 		course_list = Course.deserialize();
 		launch(args);
 		for (int i=0; i<list.length; i++){

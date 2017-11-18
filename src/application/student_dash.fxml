@@ -94,6 +94,8 @@
                               <Label fx:id="reqDate" layoutX="113.0" layoutY="39.0" prefHeight="31.0" prefWidth="134.0" text="Date:" />
                               <Label layoutX="25.0" layoutY="112.0" prefHeight="21.0" prefWidth="64.0" text="Capacity" />
                               <TextField fx:id="reqCapacity" layoutX="105.0" layoutY="107.0" prefHeight="31.0" prefWidth="70.0" promptText="eg: 100" />
+                              <Label fx:id="detailError" layoutX="291.0" layoutY="4.0" prefHeight="21.0" prefWidth="158.0" text="Please enter all details!" textFill="#e83030" />
+                              <Label fx:id="timeError" layoutX="283.0" layoutY="4.0" prefHeight="21.0" prefWidth="174.0" text="Please enter a valid time!" textFill="#e83030" />
                            </children>
                         </AnchorPane>
                      </children>
@@ -129,26 +131,41 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <AnchorPane prefHeight="537.0" prefWidth="816.0">
-                           <children>
-                              <TableView prefHeight="535.0" prefWidth="816.0">
-                              	<placeholder>
-        							<Label text="You have not joined any courses!" />
-    						  	</placeholder>
+                     	<TableView fx:id="timeTable" layoutY="-3.0" prefHeight="538.0" prefWidth="816.0">
                                 <columns>
-                                	 <TableColumn prefWidth="136.0" text="Time Slot" />
-                                  <TableColumn prefWidth="107.0" text="Monday" />
-                                  <TableColumn prefWidth="159.0" text="Tuesday" />
-                                  <TableColumn prefWidth="154.0" text="Wednesday" />
-                                   <TableColumn prefWidth="116.0" text="Thursday" />
-                                  <TableColumn prefWidth="136.0" text="Friday" />
+                                  <TableColumn fx:id="timeSlot" prefWidth="51.0" text="Time" />
+                              <TableColumn fx:id="monClass" prefWidth="157.0" text="Monday" />
+                              <TableColumn fx:id="tueClass" prefWidth="163.0" text="Tuesday" />
+                              <TableColumn fx:id="wedClass" prefWidth="165.0" text="Wednesday" />
+                              <TableColumn fx:id="thuClass" prefWidth="147.0" text="Thursday" />
+                              <TableColumn fx:id="friClass" prefWidth="132.0" text="Friday" />
 								</columns>
-                              </TableView>
-                           </children>
-                         </AnchorPane>
+                           </TableView>
                      </children>
                   </AnchorPane>
               </content>
+            </Tab>
+            <Tab text="Your Courses">
+               <content>
+                  <AnchorPane>
+                     <children>
+                        <AnchorPane prefHeight="372.0" prefWidth="673.0">
+                           <children>
+                              <TableView fx:id="courseTable" prefHeight="536.0" prefWidth="816.0">
+                              <placeholder>
+        						<Label text="You have not taken any courses!" />
+    						  </placeholder>
+                                 <columns>
+                                    <TableColumn fx:id="courseCode" prefWidth="106.0" text="Code" style="-fx-alignment: CENTER;" />
+                                    <TableColumn fx:id="courseName" prefWidth="233.0" text="Name" style="-fx-alignment: CENTER;" />
+                                    <TableColumn fx:id="courseDetails" prefWidth="476.0"  style="-fx-alignment: CENTER;"/>
+                                 </columns>
+                              </TableView>
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </AnchorPane>
+               </content>
             </Tab>
             <Tab text="Search">
               <content>
@@ -168,6 +185,8 @@
     						  		</ListView>
                                  </children>
                               </AnchorPane>
+                              <Label fx:id="clashError" layoutX="82.0" layoutY="19.0" prefHeight="21.0" prefWidth="257.0" text="Cannot add course due to time clash!" textFill="#e12f2f" />
+                              <Label fx:id="searchError" layoutX="110.0" layoutY="19.0" prefHeight="21.0" prefWidth="201.0" text="Please enter valid search field!" textFill="#e12f2f" />
                            </children></AnchorPane>
                      </children>
                   </AnchorPane>

@@ -12,22 +12,23 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 public class facultyController {
-	public Button availGo, viewDate;
+	public Button availGo, viewDate, logOut;
 	public Label dateLabel;
 	public TableView<Room> availTable;
 	public TableView<Booking> bookedTable;
+	public TableView<Course> courseTable;
 	public TableColumn<Room, String> availRoomNum, availSlot;
 	public TableColumn <Booking, String> bookedRoom, bookedSlot;
+	public TableColumn <Course, String> courseName, courseCode;
 	public TableColumn<Room, Room>  availBook;
 	public TableColumn<Booking, Booking> bookedCancel;
+	public TableColumn<Course, Course> courseDetails;
 	public TableColumn<Room, Integer>availCap;
 	public TableColumn<Booking, Integer> bookedCap;
 	static Faculty user = (Faculty) loginController.user;
 	static ObservableList<Room> avail_data = FXCollections.observableArrayList();
 	static ObservableList<Booking> booked_data = FXCollections.observableArrayList();
-
-
-
+	static ObservableList<Course> course_data = FXCollections.observableArrayList();
 
 
 	    @FXML
@@ -95,6 +96,36 @@ public class facultyController {
 
 			            }
 			        });
+			        courseDetails.setCellValueFactory(
+				            param -> new ReadOnlyObjectWrapper<>(param.getValue())
+				        );
+
+
+				        courseDetails.setCellFactory(param -> new TableCell<Course, Course>() {
+				            private final Button bookButton = new Button("View Details");
+
+				            @Override
+				            protected void updateItem(Course course, boolean empty) {
+				                super.updateItem(course, empty);
+
+				                if (course == null) {
+				                    setGraphic(null);
+				                    return;
+				                }
+
+				                setGraphic(bookButton);
+				                bookButton.setOnAction(arg0 ->{
+				                	try {
+										handleViewDetailAction(arg0, course);
+									} catch (IOException e) {
+										e.printStackTrace();
+									}
+
+				                });
+
+				            }
+
+				        });
 
 
 			for(int i=0; i<Main.list.length; i++){
@@ -102,11 +133,17 @@ public class facultyController {
 				ArrayList<Booking> booking = Main.list[i].getBooking();
 					if(booking.size()>0){
 						for(int j=0; j<booking.size(); j++){
-							if(booked_data.contains(booking.get(j))==false){
+							if(booked_data.contains(booking.get(j))==false && booking.get(i).user.equals(user.email_id)){
 								booked_data.add(booking.get(j));
 							}
 						}
 					}
+			}
+
+			for(int i=0; i<Main.course_list.size(); i++){
+				if(Main.course_list.get(i).Instructor.equals(user.name)){
+					course_data.add(Main.course_list.get(i));
+				}
 			}
 
 	        availRoomNum.setCellValueFactory(new PropertyValueFactory<Room, String>("name"));
@@ -117,8 +154,12 @@ public class facultyController {
 	        bookedCap.setCellValueFactory(new PropertyValueFactory<Booking, Integer>("capacity"));
 	        bookedSlot.setCellValueFactory(new PropertyValueFactory<Booking, String>("slot"));
 
+	        courseName.setCellValueFactory(new PropertyValueFactory<Course, String>("name"));
+	        courseCode.setCellValueFactory(new PropertyValueFactory<Course, String>("code"));
+
 	        availTable.setItems(avail_data);
 	        bookedTable.setItems(booked_data);
+	        courseTable.setItems(course_data);
 
 	        availGo.setOnAction(arg0 ->{
             	handleGoAction(arg0);
@@ -129,8 +170,22 @@ public class facultyController {
 	        	Main.scene.showCal();
             });
 
+	        logOut.setOnAction(arg0 ->{
+            	try {
+					handleLogOutAction(arg0);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+            });
+
 
 	}
+
+
+		private void handleViewDetailAction(ActionEvent arg0, Course course) throws IOException {
+			viewDetailsController.course = course;
+			Main.scene.openDialog("viewDetails");
+		}
 
 
 	    private void handleGoAction(ActionEvent arg0) {
@@ -168,6 +223,15 @@ public class facultyController {
 			booked_data.remove(booking);
 			avail_data.remove(booking.room);
 			avail_data.add(booking.room);
+		}
+
+		private void handleLogOutAction(ActionEvent arg0) throws IOException {
+			Main.scene.change("logged_out");
+			try {
+				Faculty.serialize(user);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 
 

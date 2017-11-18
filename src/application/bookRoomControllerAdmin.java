@@ -8,6 +8,7 @@ import javafx.stage.Stage;
 public class bookRoomControllerAdmin {
 	static Room room;
 	public Button bookYes, bookNo;
+	public Label timeError;
 	public ChoiceBox<String> fromHrs, fromMins, toHrs, toMins;
 
 	 @FXML
@@ -27,7 +28,7 @@ public class bookRoomControllerAdmin {
 				 "14", "15", "16", "17", "18", "19", "20","21","22","23");
 
 
-
+		 timeError.setVisible(false);
 		 bookYes.setOnAction(arg0 -> {
 				handleBookingAction(arg0);
 			});
@@ -45,15 +46,31 @@ public class bookRoomControllerAdmin {
 	}
 
 	private void handleBookingAction(ActionEvent arg0) {
-		adminController.user.bookRoom(room, Main.date, fromHrs.getValue(), fromMins.getValue(), toHrs.getValue(), toMins.getValue());
-		adminController.book(room);
-		Stage stage = (Stage) bookYes.getScene().getWindow();
-		stage.close();
+		if(fromHrs.getValue()!=null && fromMins.getValue()!=null && toHrs.getValue()!=null && toMins.getValue()!=null){
+			int fromhrs = Integer.parseInt(fromHrs.getValue());
+			int frommin = Integer.parseInt(fromMins.getValue());
+			int tohrs = Integer.parseInt(toHrs.getValue());
+			int tomins = Integer.parseInt(toMins.getValue());
+			if(fromhrs>tohrs || (fromhrs==tohrs && frommin>=tomins)){
+				timeError.setVisible(true);
+			}
+			else{
+				adminController.user.bookRoom(room, Main.date, fromHrs.getValue(), fromMins.getValue(), toHrs.getValue(), toMins.getValue());
+				adminController.book(room);
+				Stage stage = (Stage) bookYes.getScene().getWindow();
+				stage.close();
+
+			}
+		}
+		else{
+			timeError.setVisible(true);
+		}
 
 	}
 
 
-	}
+
+}
 
 
 

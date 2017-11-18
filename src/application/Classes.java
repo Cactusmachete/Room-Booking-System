@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 public class Classes implements Serializable {
 
+	private static final long serialVersionUID = 33L;
 	String courseName;
 	String room_name;
 	Room room;
@@ -11,6 +12,8 @@ public class Classes implements Serializable {
 	String timeFrom, timeTo, startHour="", startMin="", endHour="", endMin="";
 	String[] is = {"Class", "Tut", "Lab"};
 	String onDay;
+	String toString;
+
 
 	public Classes(String name, String room_name, int isWhat, String timeFrom, String timeTo){
 		this.courseName = name;
@@ -45,13 +48,11 @@ public class Classes implements Serializable {
 				this.room = Main.list[i];
 			}
 		}
-		/*System.out.println(this.courseName+" "+this.room.name);
-*/
-
+		this.toString = this.courseName+" "+ is[isWhat]+" "+this.room_name;
 	}
 
 	public String toString(){
-		return (this.room_name+" "+ is[isWhat]+" "+timeFrom+"-"+timeTo);
+		return toString;
 	}
 
 }

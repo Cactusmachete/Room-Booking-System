@@ -1,10 +1,5 @@
 package application;
-/**
- * <h1> The Day Class </h1>
- * This class represents a Day of working here at IIIT Delhi, date is a date string, Status represents the status of
- * day from 00:00 to 11:30, booking is an arraylist of all the bookings made that day
- * @author Rohan Chhokra
- */
+
 import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -55,16 +50,7 @@ public class Day implements Serializable {
 	}
 
 
-	/**
-	 * Function to book room during the day
-	 * @param startHour HH from HH:MM where HH denotes hours for starting time
-	 * @param startMin  MM from HH:MM where HH denotes hours for starting time
-	 * @param endHour	HH from HH:MM where HH denotes hours for ending time
-	 * @param endMin	MM from HH:MM where HH denotes hours for ending time
-	 * @param user		username who made the booking
-	 * @param purpose	purpose of booking
-	 * @param room		Room object which is to be booked
-	 */
+
 	public void bookRoom(String startHour,String startMin, String endHour, String endMin, String user, String purpose, Room room) {
 		int initialhour = Integer.valueOf(startHour);
 		int endhour = Integer.valueOf(endHour);
@@ -104,10 +90,7 @@ public class Day implements Serializable {
 	public ArrayList<Booking> getBooking(){
 		return this.booking;
 	}
-	/**
-	 * Function which returns the slot for room-free time which will be displayed on the screen under 'View Room'
-	 * @return the slot
-	 */
+
 	public String getSlots() {
 		String ans = "";
 		int i = 0;
@@ -158,10 +141,7 @@ public class Day implements Serializable {
 		return ans;
 	}
 
-	/**
-	 * Function to cancel a booking
-	 * @param booking which is to be cancelled
-	 */
+
 	public void cancelbooking(Booking booking) {
 		String slot = booking.getSlot();
 		int initialhour = Integer.valueOf(slot.substring(0,2));
@@ -182,11 +162,7 @@ public class Day implements Serializable {
 	}
 
 }
-/**
- * Exception class for Already Booked Room Situations
- * @author Rohan Chhokra
- *
- */
+
 class AlreadyBookedException extends Exception {
 	AlreadyBookedException(String s ){
 		super(s);

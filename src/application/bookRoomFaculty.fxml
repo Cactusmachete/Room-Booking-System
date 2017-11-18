@@ -23,5 +23,6 @@
       <Label layoutX="29.0" layoutY="160.0" prefHeight="21.0" prefWidth="78.0" text="To      Hrs:" />
       <Label layoutX="219.0" layoutY="99.0" prefHeight="21.0" prefWidth="41.0" text="Mins:" />
       <Label layoutX="219.0" layoutY="160.0" prefHeight="21.0" prefWidth="41.0" text="Mins:" />
+      <Label fx:id="timeError" layoutX="118.0" layoutY="14.0" prefHeight="21.0" prefWidth="203.0" text="Please enter a valid time slot!" textFill="#ee4141" />
    </children>
 </AnchorPane>

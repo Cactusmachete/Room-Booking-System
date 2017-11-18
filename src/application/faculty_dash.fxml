@@ -62,8 +62,30 @@
                   </AnchorPane>
                </content>
             </Tab>
+            <Tab text="Your Courses">
+               <content>
+                  <AnchorPane>
+                     <children>
+                        <AnchorPane prefHeight="372.0" prefWidth="673.0">
+                           <children>
+                              <TableView fx:id="courseTable" prefHeight="536.0" prefWidth="816.0">
+                              <placeholder>
+        						<Label text="You have no courses!" />
+    						  </placeholder>
+                                 <columns>
+                                    <TableColumn fx:id="courseCode" prefWidth="106.0" text="Code" style="-fx-alignment: CENTER;" />
+                                    <TableColumn fx:id="courseName" prefWidth="233.0" text="Name" style="-fx-alignment: CENTER;" />
+                                    <TableColumn fx:id="courseDetails" prefWidth="476.0"  style="-fx-alignment: CENTER;"/>
+                                 </columns>
+                              </TableView>
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
           </tabs>
       </TabPane>
-      <Button layoutX="737.0" layoutY="4.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="76.0" text="Log out" />
+      <Button fx:id="logOut" layoutX="737.0" layoutY="4.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="76.0" text="Log out" />
    </children>
 </AnchorPane>

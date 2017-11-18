@@ -19,12 +19,10 @@ public class manageReqController {
 
 		for(int i=0; i<Main.list.length; i++){
 			room_data.add(Main.list[i].getName());
-			System.out.println(Main.list[i]);
 		}
 
 		room.getItems().removeAll();
 		room.getItems().addAll(room_data);
-		room.getSelectionModel().select("");
 
 		error.setVisible(false);
 
@@ -38,7 +36,7 @@ public class manageReqController {
 	}
 
 	private void handleAcceptAction(ActionEvent arg0) {
-		if(room.getValue().isEmpty()){
+		if(room.getValue()==null){
 			error.setVisible(true);
 		}
 
