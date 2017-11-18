@@ -1,4 +1,9 @@
 package application;
+/**
+ * <h1>The Student Controller Class </h1>
+ * The controller class for Student's dashboard. 
+ * @author Ahilya Sinha
+ */
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -339,6 +344,10 @@ public class studentController{
 	        listView.setItems(course_data);
 
 	}
+	
+	/** 
+	* creates/refreshes the list used to show the user's timetable
+	*/
 
 	private void makelist() {
 		time_data.clear();
@@ -369,6 +378,12 @@ public class studentController{
 		}
 
 	}
+	
+	/** 
+	* Called when user wishes to drop a course. 
+	* @param arg0 ActionEvent
+	* @param course Course which is to be dropped
+	**/
 
 	private void handleDropAction(ActionEvent arg0, Course course) {
 		user.DropCourse(course);
@@ -379,11 +394,24 @@ public class studentController{
 		timeTable.setItems(time_data);
 
 	}
+	
+	/** Called when user wants to view the details of their courses.
+	* @param arg0 ActionEvent
+	* @param Course course for which user wants to view details
+	* @throws IOException
+	*/
+
 
 	private void handleViewDetailAction(ActionEvent arg0, Course course) throws IOException {
 		viewDetailsController.course = course;
 		Main.scene.openDialog("viewDetails");
 	}
+	
+	/** 
+	* Called when user wants to join a course. 
+	* @param arg0 ActionEvent
+	* @param course Course which user wishes to join
+	*/
 
 	private void handleAddCourseAction(ActionEvent arg0, Course course) {
 		try {
@@ -401,6 +429,11 @@ public class studentController{
 			searchBox.setText("");
 		}
 	}
+	
+	/**
+	* Called when user wishes to search through the course catalog using certain keywords.
+	* @param arg0 ActionEvent
+	*/
 
 	private void handleSearchAction(ActionEvent arg0) {
 		clashError.setVisible(false);
@@ -424,12 +457,24 @@ public class studentController{
 			searchBox.setText("");
 		}
 	}
+	
+	/**
+	* Called when user wishes to delete their request for room booking.
+	* @param arg0 ActionEvent
+	* @param request Request which is to be deleted
+	*/
 
 	private void handleRequestDeleteAction(ActionEvent arg0, Request request) {
 		req_data.remove(request);
 		request.RequestStatus=4;
 
 	}
+	
+	/**
+	* Called when user wishes to cancel their request for room booking.
+	* @param arg0 ActionEvent
+	* @param request Request which is to be cancelled.
+	*/
 
 	private void handleRequestCancelAction(ActionEvent arg0, Request request) {
 		user.requests.remove(request);
@@ -438,6 +483,11 @@ public class studentController{
 		request.RequestStatus=3;
 		req_data.add(request);
 	}
+	
+	/**
+	* Called when user submits their room booking request.
+	* @param arg0 ActionEvent
+	*/
 
 	private void handleRequestAction(ActionEvent arg0) {
 
@@ -478,11 +528,22 @@ public class studentController{
 		}
 	}
 
-
+	/**
+	* Checks whether a given String is numberic or not.
+	* @param text String which is to be checked.
+	*/
 	private boolean isNumeric(String text) {
 		return text != null && text.matches("[-+]?\\d*\\.?\\d+");
 
 	}
+	
+	/**
+	   	 * Handles the logout action when user clicks the log out button.
+		* @param arg0 ActionEvent
+		* @throws IOException
+	    	*/
+
+
 
 	private void handleLogOutAction(ActionEvent arg0) throws IOException {
 		Main.scene.change("logged_out");
@@ -492,6 +553,11 @@ public class studentController{
 			e.printStackTrace();
 		}
 	}
+	
+	/**
+	    * Refreshes the date and list of available rooms to the new date chosen by the User.
+ 	    * @param arg0 of type ActionEvent
+	    */
 
 	private void handleGoAction(ActionEvent arg0){
 
@@ -502,11 +568,24 @@ public class studentController{
 				avail_data.add(Main.list[i]);
 		}
 	}
+	
+	/**
+	   	 * Manages room bookings by the Student by opening a dialog.
+		 * Called when user wants to cancel a booking.
+ 	    	* @param arg0 of type ActionEvent
+		* @param booking object to be cancelled.
+		* @throws IOException
+	    	*/
 
 	private void handleCancelAction(ActionEvent arg0, Booking booking) throws IOException{
 		Main.scene.openDialog("cancelBookingStudent");
 		cancelBookingControllerStudent.booking = booking;
 	}
+	
+	/**
+	   	 * Deletes room booking for student and refreshes dashboard to display real time changes.
+		* @param booking object to be cancelled.
+	    	*/
 
 	static void cancel(Booking booking){
 		user.cancelBooking(booking.room, Main.date, booking);
