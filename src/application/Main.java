@@ -1,4 +1,9 @@
 package application;
+/**
+ * <h1> The Main Class </h1>
+ * The program is launched from here. 
+ * @author Ahilya Sinha
+ */
 
 
 import java.io.IOException;
@@ -51,7 +56,11 @@ public class Main extends Application {
 	}
 
 }
-
+/**
+ * <h1> Custom Scene Class </h1>
+ * Custom Class with two new methods.
+ * @author Ahilya Sinha
+ */
 
 class nextScene extends Scene{
 
@@ -59,7 +68,12 @@ class nextScene extends Scene{
 		super(arg0);
 
 	}
-
+	/**
+	 * This new method helps us change the fxml file currently being used in the program. i.e, 
+	 * it changes the scene.
+	 *
+	 * @param x fileName (of fileName.fxml) to which the scene has to be changed.
+ 	*/
 	 public void change(String x) throws IOException{
 		 Main.root= FXMLLoader.load(getClass().getResource(x+".fxml"));
 	     Main.scene = new nextScene(Main.root);
@@ -67,18 +81,24 @@ class nextScene extends Scene{
 	     Main.stage.show();
 	 }
 
-
+	 /**
+	 * This new method helps us open a dialog.
+	 *
+	 * @param x fileName (of fileName.fxml) which the dialog box has to be set to.
+ 	 */
 	 public void openDialog(String x) throws IOException{
 		 final Stage dialog = new Stage();
 	        dialog.initModality(Modality.APPLICATION_MODAL);
 	        dialog.initOwner(Main.stage);
 	        Parent root= FXMLLoader.load(getClass().getResource(x+".fxml"));
 	        nextScene scene = new nextScene(root);
-	      /*  Stage stage = Main.stage;*/
 	        dialog.setScene(scene);
 	        dialog.show();
 
 	 }
+	 /**
+	 * This method opens the Calender from https://github.com/SirGoose3432 's repositories in a dialog box.
+ 	 */
 
 	 public void showCal(){
 
