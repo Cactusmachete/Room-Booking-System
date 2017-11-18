@@ -2,7 +2,7 @@ package application;
 
 /**
  * This is not our code
- * @author SirGoose3432
+ * @author https://github.com/SirGoose3432
  */
 
 import javafx.fxml.FXML;
