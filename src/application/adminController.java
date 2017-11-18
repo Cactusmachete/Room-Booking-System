@@ -186,13 +186,23 @@ public class adminController {
 
 
 	    }
+	     	/**
+		* Opens a new dialog where the Admin can manage the booking requests by students.
+ 		* @param arg0 of type ActionEvent
+		* @param request of type request passes the request object to be managed to the opened dialog.
+		* @throws IOException
+		*/
 
 	    private void handleManageAction(ActionEvent arg0, Request request) throws IOException {
 			Main.scene.openDialog("manage_req");
 			manageReqController.request=request;
 
 		}
-
+	
+	    /**
+	    * Refreshes the date and list of available rooms to the new date chosen by the User.
+ 	    * @param arg0 of type ActionEvent
+	    */
 
 	    private void handleGoAction(ActionEvent arg0) {
 	    	dateLabel.setText(Main.date);
@@ -201,6 +211,13 @@ public class adminController {
 					avail_data.add(Main.list[i]);
 			}
 		}
+		 /**
+	   	 * Manages room bookings by the Admin by opening a dialog.
+		 * Called when user wants to book a room.
+ 	    	* @param arg0 of type ActionEvent
+		* @param room is room object to be booked.
+		* @throws IOException
+	    	*/
 
 
 		private void handleBookingAction(ActionEvent arg0, Room room) throws IOException {
@@ -208,12 +225,24 @@ public class adminController {
 			bookRoomControllerAdmin.room=room;
 
 		}
+		/**
+	   	 * Manages room bookings by the Admin by opening a dialog.
+		 * Called when user wants to cancel a booking.
+ 	    	* @param arg0 of type ActionEvent
+		* @param booking object to be cancelled.
+		* @throws IOException
+	    	*/
+
 
 		private void handleCancelAction(ActionEvent arg0, Booking booking) throws IOException{
 			Main.scene.openDialog("cancelBooking");
 			cancelBookingControllerAdmin.booking = booking;
 		}
-
+	
+		/**
+	   	 * Books room for admin and refreshes dashboard to display real time changes.
+		* @param room object to be booked.
+	    	*/
 
 		static void book(Room room){
 			booked_data.add(room.getBooking().get(room.getBooking().size()-1));
@@ -222,6 +251,11 @@ public class adminController {
 					avail_data.add(Main.list[i]);
 			}
 		}
+	
+		/**
+	   	 * Books room for admin and refreshes dashboard to display real time changes.
+		* @param booking object to be cancelled.
+	    	*/
 
 		static void cancel(Booking booking){
 			user.cancelBooking(booking.room, Main.date, booking);
@@ -229,6 +263,13 @@ public class adminController {
 			avail_data.remove(booking.room);
 			avail_data.add(booking.room);
 		}
+		
+		/**
+	   	 * Handles the logout action when user clicks the log out button.
+		* @param arg0 ActionEvent
+		* @throws IOException
+	    	*/
+
 
 		private void handleLogOutAction(ActionEvent arg0) throws IOException {
 			Main.scene.change("logged_out");
