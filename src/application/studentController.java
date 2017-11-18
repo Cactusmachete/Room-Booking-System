@@ -34,7 +34,7 @@ public class studentController{
 	public TableColumn <Room, Room> availBook;
 	public TableColumn<Booking, Booking> bookedCancel;
 	public TableColumn<Request, Request> reqCancel;
-	public TableColumn<Course, Course> courseDetails;
+	public TableColumn<Course, Course> courseDetails, courseDel;
 	public ChoiceBox<String> fromHrs, fromMins, toHrs, toMins, reqPrefRoom;
 	public ListView<Course> listView;
 	static Student user = (Student) loginController.user;
@@ -104,6 +104,32 @@ public class studentController{
 					}
                 });
             }
+        });
+
+
+		courseDel.setCellValueFactory(
+			            param -> new ReadOnlyObjectWrapper<>(param.getValue())
+				);
+
+		courseDel.setCellFactory(param -> new TableCell<Course, Course>() {
+            private final Button deleteButton = new Button("Drop");
+
+            @Override
+            protected void updateItem(Course course,  boolean empty) {
+                super.updateItem(course,  empty);
+
+                if (course == null) {
+                    setGraphic(null);
+                    return;
+                }
+
+                setGraphic(deleteButton);
+                deleteButton.setOnAction(arg0 ->{
+   						handleDropAction(arg0, course);
+                });
+            }
+
+
         });
 
 		reqCancel.setCellValueFactory(
@@ -341,6 +367,16 @@ public class studentController{
 			TimeTable table = new TimeTable(time.get(i), mon, tue,wed, thu, fri);
 			time_data.add(table);
 		}
+
+	}
+
+	private void handleDropAction(ActionEvent arg0, Course course) {
+		user.DropCourse(course);
+		user.CourseList.remove(course);
+		user_courses.remove(course);
+		course_data.add(course);
+		makelist();
+		timeTable.setItems(time_data);
 
 	}
 
