@@ -1,4 +1,11 @@
 package application;
+/**
+ * <h1> The Request class </h1>
+ * This class represents an object of type Request. It'll be instantianted everytime a Student requests
+ * for a room booking. Further this Request will be accepted or rejected by the admin
+ * Requester- the one who requested,Request status - accepted/rejected/cancelled/deleted,purpose- purpose string,
+ * @author Rohan Chhokra
+ */
 import java.io.*;
 import java.util.*;
 public class Request implements Serializable {
@@ -25,36 +32,56 @@ public class Request implements Serializable {
 		this.date_made=Main.dtf.format(Main.now);
 
 	}
-
+	/**
+	 * returns the status
+	 * @return whether it has been accepted or not
+	 */
 	public String getStatus(){
 		return status[RequestStatus];
 	}
-
+	/**
+	 * returns the name
+	 * @return the name of the room
+	 */
 	public String getName(){
 		return this.room;
 	}
-
+	/**
+	 * returns the purpose
+	 * @return the purpose of booking
+	 */
 	public String getPurpose(){
 		return this.purpose+" - "+Requester.email_id;
 	}
-
+	/**
+	 * returns the capacity of room
+	 * @return the capacity of room
+	 */
 	public Integer getCapacity(){
 		return this.Capacity;
 	}
-
+	/**
+	 * returns the slot
+	 * @return the time slot
+	 */
 	public String getSlot(){
 		String slot = fromHrs+":"+fromMins+" - "+toHrs+":"+toMins+" on "+this.date;
 		return slot;
 	}
-
+	/**
+	 * returns the date
+	 * @return the date
+	 */
 	public String getDateMade(){
 		return this.date_made;
 	}
 
 
-
-
-
+	/**
+	 * function for serializing the object of type Request
+	 * @param request paremeter which is to be serialized
+	 * @throws IOException
+	 */
 	public static void serialize(Request request) throws IOException  {
 		 ObjectOutputStream out = null;
 		 try {
@@ -80,7 +107,10 @@ public class Request implements Serializable {
 
 		 }
 	 }
-
+	/**
+	 * Function for deserializing all the requests for admin's access
+	 * @return ArrayList<Request> for admin
+	 */
 	public static ArrayList<Request> deserialize1() {
 		ArrayList<Request> adminrequestlist = new ArrayList<Request>();
 		ObjectInputStream in = null;
@@ -127,7 +157,11 @@ public class Request implements Serializable {
 		return adminrequestlist;
 
 	}
-
+	/**
+	 * Deserializing requests for student's access(only his/her own requests)
+	 * @param email_id for which the requests are to be deserialized
+	 * @return ArrayList<Request> for student's access
+	 */
 	public static ArrayList<Request> deserialize2(String email_id) {
 		ArrayList<Request> studentrequestlist = new ArrayList<Request>();
 		ObjectInputStream in = null;

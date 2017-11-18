@@ -1,5 +1,9 @@
 package application;
-
+/**
+ * <h1>The Admin Controller Class </h1>
+ * The controller class for Admin's dashboard. 
+ * @author Ahilya Sinha
+ */
 import java.io.IOException;
 import java.util.ArrayList;
 

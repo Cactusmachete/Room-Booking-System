@@ -1,4 +1,11 @@
 package application;
+/**
+ * <h1> The Student Class </h1>
+ * This Student extends User class. CourseList is a personalized course list of the student
+ * mon,tue,...fri represent the time table of a student
+ * numofrequest is a simple variable which stores the number of request a student has made till now
+ * @author Rohan Chhokra
+ */
 import java.util.*;
 import java.io.*;
 public class Student extends User {
@@ -16,7 +23,11 @@ public class Student extends User {
 		File Folder = new File("Request/"+id);
 		Folder.mkdir();
 	}
-
+	/**
+     * A function which serializes the given Student in parameter
+     * @param user Student to be serialized in Student/Student.email_id.ser
+     * @throws IOException
+     */
 	public static void serialize(Student user) throws IOException  {
 		 ObjectOutputStream out = null;
 		 try {
@@ -39,7 +50,10 @@ public class Student extends User {
 		 }
 	 }
 
-
+	/**
+	 * function for adding course 
+	 * @param c Course to be added
+	 */
 	public void AddCourse(Course c) throws ClassClashException {
 		if(AddCoursehelper(mon,c,"Monday")) {
 			if(AddCoursehelper(tue,c,"Tuesday")) {
@@ -58,7 +72,13 @@ public class Student extends User {
 		}
 	}
 
-
+	/**
+	 * A helper function for AddCourse
+	 * @param henlo the Day Array(one of mon,tue,wed,...fri)
+	 * @param C Course to be added
+	 * @param day Day on which Class is taking place (one of "Monday"..."Friday")
+	 * @return returns false if course clashes, true otherwise
+	 */
 	public boolean AddCoursehelper(Classes[] henlo,Course C,String day) throws ClassClashException {
 		ArrayList<Classes> innerhenlo = C.classes.get(day);
 		if(innerhenlo!=null) {
@@ -85,7 +105,12 @@ public class Student extends User {
 		}
 		return true;
 	}
-
+	/**
+	 * A second helper function for AddCourse
+	 * @param henlo the Day Array(one of mon,tue,wed,...fri)
+	 * @param C Course to be added
+	 * @param day Day on which Class is taking place (one of "Monday"..."Friday")
+	 */
 	public void AddCoursehelpertwo(Classes[] henlo,Course C,String day) {
 		ArrayList<Classes> innerhenlo = C.classes.get(day);
 		if(innerhenlo!=null) {
@@ -118,6 +143,10 @@ public class Student extends User {
 		}
 	}
 
+	/**
+	 * A function which drops the course C for student
+	 * @param c Course to be dropped
+	 */
 	public void DropCourse(Course c) {
 		DropCoursehelper(c,mon);
 		DropCoursehelper(c,tue);
@@ -126,7 +155,11 @@ public class Student extends User {
 		DropCoursehelper(c,fri);
 	}
 
-
+	/**
+	 * A helper function for DropCourse
+	 * @param c Course c to be dropped
+	 * @param henlo the Day Array(one of mon,tue,wed,...fri)
+	 */
 	public void DropCoursehelper(Course c,Classes[] henlo) {
 		for(int i = 0;i<henlo.length;i++) {
 			if(henlo[i]!=null) {
@@ -137,7 +170,11 @@ public class Student extends User {
 		}
 	}
 }
-
+/**
+ * An exception class for deteching class clash
+ * @author Rohan Chhokra
+ *
+ */
 class ClassClashException extends Exception {
 	ClassClashException(String s ){
 		super(s);

@@ -1,4 +1,11 @@
 package application;
+/**
+ * <h1>The Room Class</h1>
+ * Class which represents an object of type Room, name,slot,capacity,Dates whwich is a HashMap
+ * 
+ * @author Rohan Chhokra
+ *
+ */
 import java.io.*;
 import java.util.*;
 
@@ -20,7 +27,11 @@ public class Room implements Serializable{
 		this.slot = "all";
 		this.Capacity = y;
 	}
-
+	/**
+	 * Function to serialize a room in the file Room/Room.name.ser
+	 * @param room which has to be serialized
+	 * @throws IOException
+	 */
 	public static void serialize(Room room) throws IOException  {
 		 ObjectOutputStream out = null;
 		 try {
@@ -59,34 +70,59 @@ public class Room implements Serializable{
 		}
 
 	}
-
+	/**
+	 * returns the room name
+	 * @return room name
+	 */
 	public String getName(){
 		return this.name;
 	}
-
+	/**
+	 * returns the room capacity
+	 * @return room capacity
+	 */
 	public int getCapacity(){
 		return this.Capacity;
 	}
-
+	/**
+	 * returns the slots to be displayed
+	 * @return the slots
+	 */
 	public String getSlot(){
 		Day day = this.getInstance(Main.date);
 		String slots = day.getSlots();
 		return slots;
 	}
 
-
+	/**
+	 * returns today's bookings
+	 * @return arraylist of type Booking
+	 */
 	public ArrayList<Booking> getBooking(){
 		Day day = this.getInstance(Main.date);
 		return day.getBooking();
 	}
 
+	/**
+	 * Function to book a room
+	 * @param date String date
+	 * @param fromHrs HH where HH:MM where HH denotes hours for starting time
+	 * @param fromMins MM where HH:MM where HH denotes hours for starting time
+	 * @param toHrs HH where HH:MM where HH denotes hours for ending time
+	 * @param toMins MM where HH:MM where HH denotes hours for ending time
+	 * @param user user who made the request
+	 * @param purpose purpose of booking
+	 */
 	public void Book(String date, String fromHrs, String fromMins, String toHrs, String toMins, String user, String purpose){
 		Day day = this.getInstance(date);
 		day.bookRoom(fromHrs, fromMins, toHrs, toMins, user, purpose, this);
 		day.getSlots();
 
 	}
-
+	/**
+	 * Function deserialize all the rooms
+	 * @return returns a list of all deserialized rooms
+	 */
 	public static Room[] deserialize() {
 		Room[] list = new Room[2];
 		ObjectInputStream in1 = null;
@@ -109,7 +145,11 @@ public class Room implements Serializable{
 		}
 		return list;
 	}
-
+	/**
+	 * Function to cancel a booking
+	 * @param date date string
+	 * @param booking booking object to be cancelled 
+	 */
 	public void cancelBooking(String date, Booking booking) {
 		Day day = this.getInstance(date);
 		day.cancelbooking(booking);
