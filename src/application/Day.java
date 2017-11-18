@@ -16,6 +16,7 @@ import java.util.Date;
 public class Day implements Serializable {
 
 	private static final long serialVersionUID = 500L;
+	Room room;
 	String date;
 	int[] Status = new int[48];
 	String[] day = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday"};
