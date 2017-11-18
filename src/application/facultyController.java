@@ -185,6 +185,12 @@ public class facultyController {
 
 
 	}
+	
+	/** Called when user wants to view the details of their courses.
+	* @param arg0 ActionEvent
+	* @param Course course for which user wants to view details
+	* @throws IOException
+	*/
 
 
 		private void handleViewDetailAction(ActionEvent arg0, Course course) throws IOException {
