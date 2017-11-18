@@ -1,4 +1,9 @@
 package application;
+/**
+ * <h1>The Faculty Controller Class </h1>
+ * The controller class for Faculty's dashboard. 
+ * @author Ahilya Sinha
+ */
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -186,6 +191,11 @@ public class facultyController {
 			viewDetailsController.course = course;
 			Main.scene.openDialog("viewDetails");
 		}
+		
+	/**
+	    * Refreshes the date and list of available rooms to the new date chosen by the User.
+ 	    * @param arg0 of type ActionEvent
+	    */
 
 
 	    private void handleGoAction(ActionEvent arg0) {
@@ -195,6 +205,15 @@ public class facultyController {
 					avail_data.add(Main.list[i]);
 			}
 		}
+	
+		/**
+	   	 * Manages room bookings by the Faculty by opening a dialog.
+		 * Called when user wants to book a room.
+ 	    	* @param arg0 of type ActionEvent
+		* @param room is room object to be booked.
+		* @throws IOException
+	    	*/
+
 
 
 		private void handleBookingAction(ActionEvent arg0, Room room) throws IOException {
@@ -202,11 +221,24 @@ public class facultyController {
 			bookRoomControllerFaculty.room=room;
 
 		}
+	
+		/**
+	   	 * Manages room bookings by the Faculty by opening a dialog.
+		 * Called when user wants to cancel a booking.
+ 	    	* @param arg0 of type ActionEvent
+		* @param booking object to be cancelled.
+		* @throws IOException
+	    	*/
 
 		private void handleCancelAction(ActionEvent arg0, Booking booking) throws IOException{
 			Main.scene.openDialog("cancelBookingFaculty");
 			cancelBookingControllerFaculty.booking = booking;
 		}
+		/**
+	   	 * Books room for faculty and refreshes dashboard to display real time changes.
+		* @param room object to be booked.
+	    	*/
+
 
 		static void book(Room room){
 
@@ -217,6 +249,12 @@ public class facultyController {
 
 			}
 		}
+	
+		
+		/**
+	   	 * Deletes room booking for faculty and refreshes dashboard to display real time changes.
+		* @param booking object to be cancelled.
+	    	*/
 
 		static void cancel(Booking booking){
 			user.cancelBooking(booking.room, Main.date, booking);
@@ -224,6 +262,12 @@ public class facultyController {
 			avail_data.remove(booking.room);
 			avail_data.add(booking.room);
 		}
+	
+		/**
+	   	 * Handles the logout action when user clicks the log out button.
+		* @param arg0 ActionEvent
+		* @throws IOException
+	    	*/
 
 		private void handleLogOutAction(ActionEvent arg0) throws IOException {
 			Main.scene.change("logged_out");
