@@ -102,8 +102,6 @@ public class Day implements Serializable {
 			Booking book = new Booking(slot,user, purpose, room);
 			booking.add(book);
 		} catch (AlreadyBookedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 
 
